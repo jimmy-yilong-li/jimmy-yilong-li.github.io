@@ -28,7 +28,7 @@ abstract: >
   performance degradation of quantized models compared to their non-quantized 
   counterparts; and iv) the frequency of hallucinations and toxic content generated 
   by compressed LLMs on mobile devices.
-pdf: /pdfs/PalmBench.pdf
+pdf: /pdfs/palmbench.pdf
 bib: |-
   @misc{li2024palmbenchcomprehensivebenchmarkcompressed,
       title={PalmBench: A Comprehensive Benchmark of Compressed Large Language Models on Mobile Platforms}, 
