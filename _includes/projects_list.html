@@ -3,38 +3,36 @@
     <p class="section-label">Current Directions</p>
     <h2>Ongoing Research</h2>
     <p class="section-intro">
-      My current work centers on efficient multimodal AI systems, wireless
-      sensing platforms, and wearable intelligence that can run reliably under
-      tight compute, memory, and battery constraints.
+      Selected projects below show the full stack: custom hardware,
+      accelerator-aware software, post-training and model adaptation, and
+      wireless sensing.
     </p>
   </div>
 
   <div class="theme-grid">
     <article class="theme-card">
       <p class="theme-label">Theme 01</p>
-      <h3>Efficient Multimodal Inference on Edge Devices</h3>
+      <h3>On-Device AI Systems</h3>
       <p>
-        Building cross-accelerator systems for vision-language models on small,
-        battery-powered platforms with low-bit quantization, memory-aware
-        scheduling, and hardware-software co-design.
+        Building battery-powered multimodal devices and local inference systems
+        that combine sensors, embedded hardware, and accelerator-aware software.
       </p>
     </article>
     <article class="theme-card">
       <p class="theme-label">Theme 02</p>
-      <h3>Wireless Sensing Systems for Human-Centered Applications</h3>
+      <h3>Model Efficiency and RL Post-Training</h3>
       <p>
-        Designing UWB, mmWave, and distributed MIMO sensing systems for vital
-        sign monitoring, mobile sensing, and robust operation in real-world
-        environments.
+        Using quantization, cross-accelerator execution, and reinforcement
+        learning to adapt models for edge devices with tight compute and memory
+        budgets.
       </p>
     </article>
     <article class="theme-card">
       <p class="theme-label">Theme 03</p>
-      <h3>Wearable and Context-Aware Assistive AI</h3>
+      <h3>Wireless Sensing Systems</h3>
       <p>
-        Exploring multimodal assistants that combine perception, on-device
-        inference, and contextual understanding for wearable and accessibility
-        applications.
+        Designing UWB, mmWave, and distributed MIMO sensing systems that combine
+        RF hardware, embedded software, and learning algorithms.
       </p>
     </article>
   </div>
@@ -49,7 +47,7 @@
       </a>
       {% endif %}
       <div class="project-card-body">
-        <p class="project-kicker">Current Project</p>
+        <p class="project-kicker">Selected Project</p>
         <a href="{{ project.url }}"><h3>{{ project.title }}</h3></a>
         <p>{{ project.desp }}</p>
         <a class="text-link" href="{{ project.url }}">Explore project</a>

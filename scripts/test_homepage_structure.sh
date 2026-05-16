@@ -58,10 +58,19 @@ assert_contains "Ongoing Research"
 assert_contains "Selected Publications"
 assert_contains "Google Scholar"
 assert_contains "favicon.ico"
-assert_contains "on-device AI, human sensing, and agentic memory"
-assert_contains "StoreAgent"
-assert_contains "memory policy"
-assert_contains "task solver"
+assert_contains "systems researcher who builds both hardware and software"
+assert_contains "on-device AI, reinforcement-learning post-training"
+assert_contains "wireless sensing systems"
+assert_contains "custom hardware, accelerator-aware software, post-training and model adaptation, and wireless sensing"
+assert_contains "On-Device AI Systems"
+assert_contains "Model Efficiency and RL Post-Training"
+assert_contains "Wireless Sensing Systems"
+assert_contains "NanoMind hardware platform"
+assert_contains "Split to Fit / CRANE"
+assert_contains "EMBER / StoreAgent"
+assert_contains "MEDUSA / Gemini"
+assert_contains "EMBER"
+assert_contains "CRANE is now open-sourced for direct Apple Neural Engine inference without Core ML."
 assert_contains "Virgile: A Multimodal Visual Memory Assistant"
 assert_contains "LiveTag: Sensing Human-Object Interaction through Passive Chipless WiFi Tags"
 assert_contains "href=\"/publications/\""
@@ -69,6 +78,10 @@ assert_contains "href=\"/publications/\""
 assert_publications_contains ">Publications<"
 assert_publications_contains "Journal Papers"
 assert_publications_contains "Conference Papers"
+assert_publications_contains "EMBER: Efficient Memory via Budgeted Evidence Retention for Long-Horizon Agents"
+assert_publications_contains "<strong>Yilong Li</strong>, Suman Banerjee, Tong Che"
+assert_publications_contains "In Submission"
+assert_publications_contains "arXiv"
 assert_publications_contains "Enabling Wideband, Mobile Spectrum Sensing through Onboard Heterogeneous Computing"
 assert_publications_contains "Tiny but Mighty: A Software-Hardware Co-Design Approach for Efficient Multimodal Inference on Battery-Powered Small Devices"
 assert_publications_contains "Split to Fit: Cross-Accelerator Hybrid Quantization for Efficient Video Understanding on Edge Systems"
@@ -82,6 +95,11 @@ assert_publications_contains "NSDI 2018"
 
 if grep -Fq -- "href=\"\"" "$NORMALIZED_PUBLICATIONS"; then
   echo "FAIL: publications page should not render empty links" >&2
+  exit 1
+fi
+
+if grep -Fq -- "et al." "$NORMALIZED_PUBLICATIONS"; then
+  echo "FAIL: publications page should list full authors instead of et al." >&2
   exit 1
 fi
 
@@ -115,8 +133,18 @@ if grep -Fq -- "on-device AI for wearable platforms" "$NORMALIZED_INDEX"; then
   exit 1
 fi
 
+if grep -Fq -- "on-device AI, human sensing, and agentic memory" "$NORMALIZED_INDEX"; then
+  echo "FAIL: homepage bio should use the updated systems-research framing" >&2
+  exit 1
+fi
+
 if grep -Fq -- "CRANE: Compiled Runtime for Apple Neural Engine" "$NORMALIZED_INDEX"; then
   echo "FAIL: homepage project section should not contain CRANE with a mismatched image" >&2
+  exit 1
+fi
+
+if grep -Fq -- "compiles MIL programs with baked weights" "$NORMALIZED_INDEX"; then
+  echo "FAIL: CRANE news should stay concise on the homepage" >&2
   exit 1
 fi
 
