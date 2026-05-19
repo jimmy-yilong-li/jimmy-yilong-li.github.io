@@ -12,9 +12,11 @@ bundle exec jekyll build --destination "$BUILD_DIR" >/dev/null
 
 INDEX_HTML="$BUILD_DIR/index.html"
 PUBLICATIONS_HTML="$BUILD_DIR/publications/index.html"
+BLOG_HTML="$BUILD_DIR/blog/index.html"
 FAVICON_FILE="$BUILD_DIR/favicon.ico"
 NORMALIZED_INDEX="$BUILD_DIR/index.normalized.txt"
 NORMALIZED_PUBLICATIONS="$BUILD_DIR/publications.normalized.txt"
+NORMALIZED_BLOG="$BUILD_DIR/blog.normalized.txt"
 
 if [[ ! -f "$INDEX_HTML" ]]; then
   echo "FAIL: generated homepage not found at $INDEX_HTML" >&2
@@ -35,6 +37,13 @@ fi
 
 tr '\n' ' ' <"$PUBLICATIONS_HTML" | tr -s '[:space:]' ' ' >"$NORMALIZED_PUBLICATIONS"
 
+if [[ ! -f "$BLOG_HTML" ]]; then
+  echo "FAIL: generated blog page not found at $BLOG_HTML" >&2
+  exit 1
+fi
+
+tr '\n' ' ' <"$BLOG_HTML" | tr -s '[:space:]' ' ' >"$NORMALIZED_BLOG"
+
 assert_contains() {
   local needle="$1"
 
@@ -49,6 +58,15 @@ assert_publications_contains() {
 
   if ! grep -Fq -- "$needle" "$NORMALIZED_PUBLICATIONS"; then
     echo "FAIL: expected publications page to contain: $needle" >&2
+    exit 1
+  fi
+}
+
+assert_blog_contains() {
+  local needle="$1"
+
+  if ! grep -Fq -- "$needle" "$NORMALIZED_BLOG"; then
+    echo "FAIL: expected blog page to contain: $needle" >&2
     exit 1
   fi
 }
@@ -74,6 +92,16 @@ assert_contains "CRANE is now open-sourced for direct Apple Neural Engine infere
 assert_contains "Virgile: A Multimodal Visual Memory Assistant"
 assert_contains "LiveTag: Sensing Human-Object Interaction through Passive Chipless WiFi Tags"
 assert_contains "href=\"/publications/\""
+assert_contains "href=\"/blog/\""
+
+assert_blog_contains ">Blog<"
+assert_blog_contains "Research Notes"
+assert_blog_contains "Work in progress, prototypes, and research notes"
+assert_blog_contains "Building On-Device AI Systems from Hardware to Software"
+assert_blog_contains "RL Post-Training for Efficient Edge AI"
+assert_blog_contains "Wireless Sensing Systems in the Wild"
+assert_blog_contains "Ongoing"
+assert_blog_contains "Prototype"
 
 assert_publications_contains ">Publications<"
 assert_publications_contains "Journal Papers"
@@ -147,5 +175,15 @@ if grep -Fq -- "compiles MIL programs with baked weights" "$NORMALIZED_INDEX"; t
   echo "FAIL: CRANE news should stay concise on the homepage" >&2
   exit 1
 fi
+
+for blog_only_item in \
+  "Building On-Device AI Systems from Hardware to Software" \
+  "RL Post-Training for Efficient Edge AI" \
+  "Wireless Sensing Systems in the Wild"; do
+  if grep -Fq -- "$blog_only_item" "$NORMALIZED_INDEX"; then
+    echo "FAIL: blog notes should not be rendered on the homepage: $blog_only_item" >&2
+    exit 1
+  fi
+done
 
 echo "PASS: homepage contains the expected structure markers"
