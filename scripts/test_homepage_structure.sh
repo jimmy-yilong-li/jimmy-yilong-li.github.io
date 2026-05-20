@@ -14,6 +14,7 @@ INDEX_HTML="$BUILD_DIR/index.html"
 PUBLICATIONS_HTML="$BUILD_DIR/publications/index.html"
 BLOG_HTML="$BUILD_DIR/blog/index.html"
 FAVICON_FILE="$BUILD_DIR/favicon.ico"
+EMBER_PDF_FILE="$BUILD_DIR/pdfs/EMBER_Li.pdf"
 NORMALIZED_INDEX="$BUILD_DIR/index.normalized.txt"
 NORMALIZED_PUBLICATIONS="$BUILD_DIR/publications.normalized.txt"
 NORMALIZED_BLOG="$BUILD_DIR/blog.normalized.txt"
@@ -25,6 +26,11 @@ fi
 
 if [[ ! -f "$FAVICON_FILE" ]]; then
   echo "FAIL: generated favicon not found at $FAVICON_FILE" >&2
+  exit 1
+fi
+
+if [[ ! -f "$EMBER_PDF_FILE" ]]; then
+  echo "FAIL: generated EMBER PDF not found at $EMBER_PDF_FILE" >&2
   exit 1
 fi
 
@@ -110,6 +116,7 @@ assert_publications_contains "EMBER: Efficient Memory via Budgeted Evidence Rete
 assert_publications_contains "<strong>Yilong Li</strong>, Suman Banerjee, Tong Che"
 assert_publications_contains "In Submission"
 assert_publications_contains "arXiv"
+assert_publications_contains "href=\"/pdfs/EMBER_Li.pdf\">PDF"
 assert_publications_contains "Enabling Wideband, Mobile Spectrum Sensing through Onboard Heterogeneous Computing"
 assert_publications_contains "Tiny but Mighty: A Software-Hardware Co-Design Approach for Efficient Multimodal Inference on Battery-Powered Small Devices"
 assert_publications_contains "Split to Fit: Cross-Accelerator Hybrid Quantization for Efficient Video Understanding on Edge Systems"
