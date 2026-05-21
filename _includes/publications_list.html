@@ -13,6 +13,7 @@
     {% for post in posts %}
       {% assign post_arxiv = post.arxiv | strip %}
       {% assign post_pdf = post.pdf | strip %}
+      {% assign post_code = post.code | strip %}
       {% assign post_link = post.link | strip %}
       <article class="publication-item">
         {% if post.image %}
@@ -35,6 +36,9 @@
             {% endif %}
             {% if post_pdf != "" %}
             <a href="{{ post_pdf }}">PDF</a>
+            {% endif %}
+            {% if post_code != "" %}
+            <a href="{{ post_code }}">Code</a>
             {% endif %}
             {% if post_link != "" and post_link != post_arxiv and post_link != post_pdf %}
             <a href="{{ post_link }}">Link</a>

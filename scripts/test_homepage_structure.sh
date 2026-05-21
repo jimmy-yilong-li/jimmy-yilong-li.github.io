@@ -95,6 +95,8 @@ assert_contains "EMBER / StoreAgent"
 assert_contains "MEDUSA / Gemini"
 assert_contains "EMBER"
 assert_contains "CRANE is now open-sourced for direct Apple Neural Engine inference without Core ML."
+assert_contains "MEDUSA repo is here!"
+assert_contains "href=\"https://github.com/JimmyLi-Network/Medusa_UWB_MIMO\">Code"
 assert_contains "Virgile: A Multimodal Visual Memory Assistant"
 assert_contains "LiveTag: Sensing Human-Object Interaction through Passive Chipless WiFi Tags"
 assert_contains "href=\"/publications/\""
@@ -127,6 +129,7 @@ assert_publications_contains "IEEE DySPAN 2024"
 assert_publications_contains "Conference version"
 assert_publications_contains "GetMobile 2018"
 assert_publications_contains "NSDI 2018"
+assert_publications_contains "href=\"https://github.com/JimmyLi-Network/Medusa_UWB_MIMO\">Code"
 
 if grep -Fq -- "href=\"\"" "$NORMALIZED_PUBLICATIONS"; then
   echo "FAIL: publications page should not render empty links" >&2
@@ -180,6 +183,11 @@ fi
 
 if grep -Fq -- "compiles MIL programs with baked weights" "$NORMALIZED_INDEX"; then
   echo "FAIL: CRANE news should stay concise on the homepage" >&2
+  exit 1
+fi
+
+if grep -Fq -- "MEDUSA code was open-sourced" "$NORMALIZED_INDEX"; then
+  echo "FAIL: MEDUSA news should use the requested repo announcement title" >&2
   exit 1
 fi
 
