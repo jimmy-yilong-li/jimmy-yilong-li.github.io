@@ -1,58 +1,84 @@
 <section id="research" class="home-section">
   <div class="section-heading">
-    <p class="section-label">Current Directions</p>
-    <h2>Ongoing Research</h2>
+    <p class="section-label">Research Systems</p>
+    <h2>Research Projects</h2>
     <p class="section-intro">
-      Selected projects below show the full stack: custom hardware,
-      accelerator-aware software, post-training and model adaptation, and
-      wireless sensing.
+      I build systems across sensing hardware, on-device AI, ML systems, and
+      reinforcement-learning fine-tuning for efficient LLMs.
     </p>
   </div>
 
   <div class="theme-grid">
     <article class="theme-card">
       <p class="theme-label">Theme 01</p>
-      <h3>On-Device AI Systems</h3>
+      <h3>Hardware + Software</h3>
       <p>
-        Building battery-powered multimodal devices and local inference systems
-        that combine sensors, embedded hardware, and accelerator-aware software.
+        Building physical sensing and AI systems from RF hardware and embedded
+        platforms through runtime software and model deployment.
       </p>
     </article>
     <article class="theme-card">
       <p class="theme-label">Theme 02</p>
-      <h3>Model Efficiency and RL Post-Training</h3>
+      <h3>Efficient Edge AI</h3>
       <p>
-        Using quantization, cross-accelerator execution, and reinforcement
-        learning to adapt models for edge devices with tight compute and memory
-        budgets.
+        Designing inference pipelines, accelerator mappings, and memory policies
+        for devices with tight compute, energy, and context budgets.
       </p>
     </article>
     <article class="theme-card">
       <p class="theme-label">Theme 03</p>
-      <h3>Wireless Sensing Systems</h3>
+      <h3>Learning Under Constraints</h3>
       <p>
-        Designing UWB, mmWave, and distributed MIMO sensing systems that combine
-        RF hardware, embedded software, and learning algorithms.
+        Using model adaptation and reinforcement-learning fine-tuning to improve
+        reasoning, retrieval, and memory under practical deployment limits.
       </p>
     </article>
   </div>
 
-  {% assign projects = site.projects | sort: "date" | reverse %}
   <div class="project-grid">
-    {% for project in projects %}
     <article class="project-card">
-      {% if project.image %}
-      <a class="project-image-link" href="{{ project.url }}">
-        <img class="project-image" src="{{ project.image }}" alt="{{ project.title }}" />
-      </a>
-      {% endif %}
       <div class="project-card-body">
-        <p class="project-kicker">Selected Project</p>
-        <a href="{{ project.url }}"><h3>{{ project.title }}</h3></a>
-        <p>{{ project.desp }}</p>
-        <a class="text-link" href="{{ project.url }}">Explore project</a>
+        <p class="project-kicker">Wireless Sensing</p>
+        <h3>Medusa Wireless Sensing</h3>
+        <p>
+          Distributed UWB MIMO radar systems for robust biometric and vital-sign
+          sensing in real-world indoor environments.
+        </p>
+        <a class="text-link" href="/projects/">View project context</a>
       </div>
     </article>
-    {% endfor %}
+    <article class="project-card">
+      <div class="project-card-body">
+        <p class="project-kicker">On-Device AI</p>
+        <h3>On-Device AI</h3>
+        <p>
+          Battery-powered multimodal assistant systems that combine custom
+          hardware, embedded software, and local vision-language inference.
+        </p>
+        <a class="text-link" href="/projects/">View project context</a>
+      </div>
+    </article>
+    <article class="project-card">
+      <div class="project-card-body">
+        <p class="project-kicker">ML Systems</p>
+        <h3>ML Sys / EdgeFlow</h3>
+        <p>
+          Edge ML systems for efficient inference across constrained devices and
+          heterogeneous accelerators, including direct ANE runtime support.
+        </p>
+        <a class="text-link" href="/projects/">View project context</a>
+      </div>
+    </article>
+    <article class="project-card">
+      <div class="project-card-body">
+        <p class="project-kicker">LLM Post-Training</p>
+        <h3>LLM RL Fine-Tuning</h3>
+        <p>
+          Reinforcement-learning fine-tuning and agentic-memory methods for
+          efficient long-horizon reasoning under compute and context budgets.
+        </p>
+        <a class="text-link" href="/projects/">View project context</a>
+      </div>
+    </article>
   </div>
 </section>

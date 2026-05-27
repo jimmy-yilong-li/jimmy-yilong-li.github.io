@@ -1,7 +1,8 @@
 ---
 layout: post
-title: MEDUSA repo is here!https://github.com/JimmyLi-Network/Medusa_UWB_MIMO
+title: MEDUSA repo is here!
 date: 2026-05-21
+external_url: https://github.com/JimmyLi-Network/Medusa_UWB_MIMO
 ---
 
-MEDUSA repo is here!
+MEDUSA repository is available on GitHub.

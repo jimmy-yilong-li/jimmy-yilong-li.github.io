@@ -12,11 +12,13 @@ bundle exec jekyll build --destination "$BUILD_DIR" >/dev/null
 
 INDEX_HTML="$BUILD_DIR/index.html"
 PUBLICATIONS_HTML="$BUILD_DIR/publications/index.html"
+PROJECTS_HTML="$BUILD_DIR/projects/index.html"
 BLOG_HTML="$BUILD_DIR/blog/index.html"
 FAVICON_FILE="$BUILD_DIR/favicon.ico"
 EMBER_PDF_FILE="$BUILD_DIR/pdfs/EMBER_Li.pdf"
 NORMALIZED_INDEX="$BUILD_DIR/index.normalized.txt"
 NORMALIZED_PUBLICATIONS="$BUILD_DIR/publications.normalized.txt"
+NORMALIZED_PROJECTS="$BUILD_DIR/projects.normalized.txt"
 NORMALIZED_BLOG="$BUILD_DIR/blog.normalized.txt"
 
 if [[ ! -f "$INDEX_HTML" ]]; then
@@ -43,6 +45,13 @@ fi
 
 tr '\n' ' ' <"$PUBLICATIONS_HTML" | tr -s '[:space:]' ' ' >"$NORMALIZED_PUBLICATIONS"
 
+if [[ ! -f "$PROJECTS_HTML" ]]; then
+  echo "FAIL: generated projects page not found at $PROJECTS_HTML" >&2
+  exit 1
+fi
+
+tr '\n' ' ' <"$PROJECTS_HTML" | tr -s '[:space:]' ' ' >"$NORMALIZED_PROJECTS"
+
 if [[ ! -f "$BLOG_HTML" ]]; then
   echo "FAIL: generated blog page not found at $BLOG_HTML" >&2
   exit 1
@@ -68,6 +77,15 @@ assert_publications_contains() {
   fi
 }
 
+assert_projects_contains() {
+  local needle="$1"
+
+  if ! grep -Fq -- "$needle" "$NORMALIZED_PROJECTS"; then
+    echo "FAIL: expected projects page to contain: $needle" >&2
+    exit 1
+  fi
+}
+
 assert_blog_contains() {
   local needle="$1"
 
@@ -78,29 +96,43 @@ assert_blog_contains() {
 }
 
 assert_contains "News / Updates"
-assert_contains "Ongoing Research"
+assert_contains "Research Projects"
 assert_contains "Selected Publications"
 assert_contains "Google Scholar"
 assert_contains "favicon.ico"
 assert_contains "systems researcher who builds both hardware and software"
 assert_contains "on-device AI, reinforcement-learning post-training"
-assert_contains "wireless sensing systems"
-assert_contains "custom hardware, accelerator-aware software, post-training and model adaptation, and wireless sensing"
-assert_contains "On-Device AI Systems"
-assert_contains "Model Efficiency and RL Post-Training"
-assert_contains "Wireless Sensing Systems"
-assert_contains "NanoMind hardware platform"
-assert_contains "Split to Fit / CRANE"
-assert_contains "EMBER / StoreAgent"
-assert_contains "MEDUSA / Gemini"
+assert_contains "sensing hardware, on-device AI, ML systems, and reinforcement-learning fine-tuning"
+assert_contains "Hardware + Software"
+assert_contains "Efficient Edge AI"
+assert_contains "Learning Under Constraints"
+assert_contains "<h3>Medusa Wireless Sensing</h3>"
+assert_contains "<h3>On-Device AI</h3>"
+assert_contains "<h3>ML Sys / EdgeFlow</h3>"
+assert_contains "<h3>LLM RL Fine-Tuning</h3>"
 assert_contains "EMBER"
+assert_contains "Cast a Wider Net: Coordinated Pass@K Policy Optimization for Code Reasoning"
+assert_contains "publication-item--text-only"
 assert_contains "CRANE is now open-sourced for direct Apple Neural Engine inference without Core ML."
 assert_contains "MEDUSA repo is here!"
+assert_contains "href=\"https://github.com/JimmyLi-Network/Medusa_UWB_MIMO\">MEDUSA repo is here!"
 assert_contains "href=\"https://github.com/JimmyLi-Network/Medusa_UWB_MIMO\">Code"
-assert_contains "Virgile: A Multimodal Visual Memory Assistant"
 assert_contains "LiveTag: Sensing Human-Object Interaction through Passive Chipless WiFi Tags"
 assert_contains "href=\"/publications/\""
+assert_contains "href=\"/projects/\""
 assert_contains "href=\"/blog/\""
+
+assert_projects_contains ">Projects<"
+assert_projects_contains "Medusa Wireless Sensing"
+assert_projects_contains "On-Device AI"
+assert_projects_contains "ML Sys / EdgeFlow"
+assert_projects_contains "LLM RL Fine-Tuning"
+assert_projects_contains "CRANE"
+assert_projects_contains "NanoMind"
+assert_projects_contains "Virgile"
+assert_projects_contains "EMBER"
+assert_projects_contains "CPPO"
+assert_projects_contains "MEDUSA"
 
 assert_blog_contains ">Blog<"
 assert_blog_contains "Research Notes"
@@ -185,6 +217,17 @@ if grep -Fq -- "CRANE: Compiled Runtime for Apple Neural Engine" "$NORMALIZED_IN
   exit 1
 fi
 
+for old_project_label in \
+  "Split to Fit / CRANE" \
+  "EMBER / StoreAgent" \
+  "MEDUSA / Gemini" \
+  "NanoMind / Virgile"; do
+  if grep -Fq -- "$old_project_label" "$NORMALIZED_INDEX"; then
+    echo "FAIL: homepage should not use old mixed project label: $old_project_label" >&2
+    exit 1
+  fi
+done
+
 if grep -Fq -- "compiles MIL programs with baked weights" "$NORMALIZED_INDEX"; then
   echo "FAIL: CRANE news should stay concise on the homepage" >&2
   exit 1
@@ -192,6 +235,11 @@ fi
 
 if grep -Fq -- "MEDUSA code was open-sourced" "$NORMALIZED_INDEX"; then
   echo "FAIL: MEDUSA news should use the requested repo announcement title" >&2
+  exit 1
+fi
+
+if grep -Fq -- "MEDUSA repo is here!https://" "$NORMALIZED_INDEX"; then
+  echo "FAIL: MEDUSA news title should not concatenate the GitHub URL" >&2
   exit 1
 fi
 
