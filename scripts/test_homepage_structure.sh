@@ -16,6 +16,7 @@ PROJECTS_HTML="$BUILD_DIR/projects/index.html"
 BLOG_HTML="$BUILD_DIR/blog/index.html"
 FAVICON_FILE="$BUILD_DIR/favicon.ico"
 EMBER_PDF_FILE="$BUILD_DIR/pdfs/EMBER_Li.pdf"
+REMIND_SLIDES_FILE="$BUILD_DIR/pdfs/Re-Mind_for_pitch.pdf"
 NORMALIZED_INDEX="$BUILD_DIR/index.normalized.txt"
 NORMALIZED_PUBLICATIONS="$BUILD_DIR/publications.normalized.txt"
 NORMALIZED_PROJECTS="$BUILD_DIR/projects.normalized.txt"
@@ -33,6 +34,11 @@ fi
 
 if [[ ! -f "$EMBER_PDF_FILE" ]]; then
   echo "FAIL: generated EMBER PDF not found at $EMBER_PDF_FILE" >&2
+  exit 1
+fi
+
+if [[ ! -f "$REMIND_SLIDES_FILE" ]]; then
+  echo "FAIL: generated Re-Mind slides not found at $REMIND_SLIDES_FILE" >&2
   exit 1
 fi
 
@@ -99,6 +105,9 @@ assert_contains "News / Updates"
 assert_contains "Research Projects"
 assert_contains "Selected Publications"
 assert_contains "Google Scholar"
+assert_contains "Re-Mind"
+assert_contains "real-world episodic memory"
+assert_contains "href=\"/pdfs/Re-Mind_for_pitch.pdf\">Re-Mind Slides"
 assert_contains "favicon.ico"
 assert_contains "systems researcher who builds both hardware and software"
 assert_contains "on-device AI, reinforcement-learning post-training"
