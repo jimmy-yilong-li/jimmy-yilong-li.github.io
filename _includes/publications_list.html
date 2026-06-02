@@ -15,12 +15,7 @@
       {% assign post_pdf = post.pdf | strip %}
       {% assign post_code = post.code | strip %}
       {% assign post_link = post.link | strip %}
-      <article class="publication-item{% unless post.image %} publication-item--text-only{% endunless %}">
-        {% if post.image %}
-        <a class="publication-image-link" href="{{ post.url }}">
-          <img class="publication-image" src="{{ post.image }}" alt="{{ post.title }}" />
-        </a>
-        {% endif %}
+      <article class="publication-item publication-item--text-only">
         <div class="publication-copy">
           <a href="{{ post.url }}"><h3>{{ post.title }}</h3></a>
           <p class="publication-meta">

@@ -131,6 +131,18 @@ assert_contains "href=\"/publications/\""
 assert_contains "href=\"/projects/\""
 assert_contains "href=\"/blog/\""
 
+selected_publications_pos="$(grep -b -o "Selected Publications" "$NORMALIZED_INDEX" | head -n 1 | cut -d: -f1)"
+research_projects_pos="$(grep -b -o "Research Projects" "$NORMALIZED_INDEX" | head -n 1 | cut -d: -f1)"
+if [[ -z "$selected_publications_pos" || -z "$research_projects_pos" || "$selected_publications_pos" -gt "$research_projects_pos" ]]; then
+  echo "FAIL: Selected Publications should appear before Research Projects on the homepage" >&2
+  exit 1
+fi
+
+if grep -Fq -- "publication-image" "$NORMALIZED_INDEX"; then
+  echo "FAIL: selected publications should not render thumbnail images on the homepage" >&2
+  exit 1
+fi
+
 assert_projects_contains ">Projects<"
 assert_projects_contains "Medusa Wireless Sensing"
 assert_projects_contains "On-Device AI"
@@ -161,7 +173,7 @@ assert_publications_contains "href=\"https://arxiv.org/abs/2605.27000\">arXiv"
 assert_publications_contains "href=\"https://arxiv.org/pdf/2605.27000\">PDF"
 assert_publications_contains "EMBER: Efficient Memory via Budgeted Evidence Retention for Long-Horizon Agents"
 assert_publications_contains "<strong>Yilong Li</strong>, Suman Banerjee, Tong Che"
-assert_publications_contains "In Submission"
+assert_publications_contains "arXiv preprint, 2026"
 assert_publications_contains "arXiv"
 assert_publications_contains "href=\"/pdfs/EMBER_Li.pdf\">PDF"
 assert_publications_contains "Enabling Wideband, Mobile Spectrum Sensing through Onboard Heterogeneous Computing"
@@ -183,6 +195,11 @@ fi
 
 if grep -Fq -- "et al." "$NORMALIZED_PUBLICATIONS"; then
   echo "FAIL: publications page should list full authors instead of et al." >&2
+  exit 1
+fi
+
+if grep -Fq -- "In Submission" "$NORMALIZED_PUBLICATIONS"; then
+  echo "FAIL: EMBER should be listed as an arXiv preprint, not In Submission" >&2
   exit 1
 fi
 
