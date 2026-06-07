@@ -14,13 +14,16 @@ INDEX_HTML="$BUILD_DIR/index.html"
 PUBLICATIONS_HTML="$BUILD_DIR/publications/index.html"
 PROJECTS_HTML="$BUILD_DIR/projects/index.html"
 BLOG_HTML="$BUILD_DIR/blog/index.html"
+MEDUSA_PAPER_HTML="$BUILD_DIR/papers/2025-12-09-Medusa/index.html"
 FAVICON_FILE="$BUILD_DIR/favicon.ico"
 EMBER_PDF_FILE="$BUILD_DIR/pdfs/EMBER_Li.pdf"
 REMIND_SLIDES_FILE="$BUILD_DIR/pdfs/Re-Mind_for_pitch.pdf"
+MMPUPIL_IMAGE_FILE="$BUILD_DIR/images/mmpupil-system.png"
 NORMALIZED_INDEX="$BUILD_DIR/index.normalized.txt"
 NORMALIZED_PUBLICATIONS="$BUILD_DIR/publications.normalized.txt"
 NORMALIZED_PROJECTS="$BUILD_DIR/projects.normalized.txt"
 NORMALIZED_BLOG="$BUILD_DIR/blog.normalized.txt"
+NORMALIZED_MEDUSA_PAPER="$BUILD_DIR/medusa-paper.normalized.txt"
 
 if [[ ! -f "$INDEX_HTML" ]]; then
   echo "FAIL: generated homepage not found at $INDEX_HTML" >&2
@@ -39,6 +42,11 @@ fi
 
 if [[ ! -f "$REMIND_SLIDES_FILE" ]]; then
   echo "FAIL: generated Re-Mind slides not found at $REMIND_SLIDES_FILE" >&2
+  exit 1
+fi
+
+if [[ ! -f "$MMPUPIL_IMAGE_FILE" ]]; then
+  echo "FAIL: generated mmPupil project image not found at $MMPUPIL_IMAGE_FILE" >&2
   exit 1
 fi
 
@@ -64,6 +72,13 @@ if [[ ! -f "$BLOG_HTML" ]]; then
 fi
 
 tr '\n' ' ' <"$BLOG_HTML" | tr -s '[:space:]' ' ' >"$NORMALIZED_BLOG"
+
+if [[ ! -f "$MEDUSA_PAPER_HTML" ]]; then
+  echo "FAIL: generated MEDUSA paper page not found at $MEDUSA_PAPER_HTML" >&2
+  exit 1
+fi
+
+tr '\n' ' ' <"$MEDUSA_PAPER_HTML" | tr -s '[:space:]' ' ' >"$NORMALIZED_MEDUSA_PAPER"
 
 assert_contains() {
   local needle="$1"
@@ -101,6 +116,15 @@ assert_blog_contains() {
   fi
 }
 
+assert_medusa_paper_contains() {
+  local needle="$1"
+
+  if ! grep -Fq -- "$needle" "$NORMALIZED_MEDUSA_PAPER"; then
+    echo "FAIL: expected MEDUSA paper page to contain: $needle" >&2
+    exit 1
+  fi
+}
+
 assert_contains "News / Updates"
 assert_contains "Research Projects"
 assert_contains "Selected Publications"
@@ -111,17 +135,16 @@ assert_contains "href=\"/pdfs/Re-Mind_for_pitch.pdf\">Re-Mind Slides"
 assert_contains "favicon.ico"
 assert_contains "systems researcher who builds both hardware and software"
 assert_contains "on-device AI, reinforcement-learning post-training"
-assert_contains "sensing hardware, on-device AI, ML systems, and reinforcement-learning fine-tuning"
-assert_contains "Hardware + Software"
-assert_contains "Efficient Edge AI"
-assert_contains "Learning Under Constraints"
-assert_contains "<h3>Medusa Wireless Sensing</h3>"
-assert_contains "<h3>On-Device AI</h3>"
-assert_contains "<h3>ML Sys / EdgeFlow</h3>"
-assert_contains "<h3>LLM RL Fine-Tuning</h3>"
+assert_contains "Three current research lines"
+assert_contains "<p class=\"project-kicker\">RL Finetuning for Small Models</p>"
+assert_contains "<p class=\"project-kicker\">Wireless Human Sensing</p>"
+assert_contains "<p class=\"project-kicker\">On-Device AI</p>"
+assert_contains "mmPupil"
+assert_contains "Virgile / NanoMind"
 assert_contains "EMBER"
 assert_contains "Cast a Wider Net: Coordinated Pass@K Policy Optimization for Code Reasoning"
 assert_contains "publication-item--text-only"
+assert_contains "<strong class=\"publication-venue\">MobiCom 2025</strong>"
 assert_contains "CRANE is now open-sourced for direct Apple Neural Engine inference without Core ML."
 assert_contains "MEDUSA repo is here!"
 assert_contains "href=\"https://github.com/JimmyLi-Network/Medusa_UWB_MIMO\">MEDUSA repo is here!"
@@ -144,16 +167,22 @@ if grep -Fq -- "publication-image" "$NORMALIZED_INDEX"; then
 fi
 
 assert_projects_contains ">Projects<"
-assert_projects_contains "Medusa Wireless Sensing"
+assert_projects_contains "RL Finetuning for Small Models"
+assert_projects_contains "Wireless Human Sensing"
 assert_projects_contains "On-Device AI"
-assert_projects_contains "ML Sys / EdgeFlow"
-assert_projects_contains "LLM RL Fine-Tuning"
+assert_projects_contains "mmPupil"
+assert_projects_contains "images/mmpupil-system.png"
 assert_projects_contains "CRANE"
 assert_projects_contains "NanoMind"
 assert_projects_contains "Virgile"
 assert_projects_contains "EMBER"
 assert_projects_contains "CPPO"
 assert_projects_contains "MEDUSA"
+
+if grep -Fq -- "mmPupil.pdf" "$NORMALIZED_INDEX" "$NORMALIZED_PROJECTS"; then
+  echo "FAIL: mmPupil draft PDF should not be linked from public pages while under review" >&2
+  exit 1
+fi
 
 assert_blog_contains ">Blog<"
 assert_blog_contains "Research Notes"
@@ -169,6 +198,7 @@ assert_publications_contains "Journal Papers"
 assert_publications_contains "Conference Papers"
 assert_publications_contains "Cast a Wider Net: Coordinated Pass@K Policy Optimization for Code Reasoning"
 assert_publications_contains "Coordinated Pass@K Policy Optimization"
+assert_publications_contains "<strong class=\"publication-venue\">MobiCom 2025</strong>"
 assert_publications_contains "href=\"https://arxiv.org/abs/2605.27000\">arXiv"
 assert_publications_contains "href=\"https://arxiv.org/pdf/2605.27000\">PDF"
 assert_publications_contains "EMBER: Efficient Memory via Budgeted Evidence Retention for Long-Horizon Agents"
@@ -187,6 +217,8 @@ assert_publications_contains "Conference version"
 assert_publications_contains "GetMobile 2018"
 assert_publications_contains "NSDI 2018"
 assert_publications_contains "href=\"https://github.com/JimmyLi-Network/Medusa_UWB_MIMO\">Code"
+
+assert_medusa_paper_contains "<strong class=\"publication-venue\">MobiCom 2025</strong>"
 
 if grep -Fq -- "href=\"\"" "$NORMALIZED_PUBLICATIONS"; then
   echo "FAIL: publications page should not render empty links" >&2
@@ -244,10 +276,23 @@ if grep -Fq -- "CRANE: Compiled Runtime for Apple Neural Engine" "$NORMALIZED_IN
 fi
 
 for old_project_label in \
+  "Theme 01" \
+  "Theme 02" \
+  "Theme 03" \
+  "Hardware + Software" \
+  "Efficient Edge AI" \
+  "Learning Under Constraints" \
+  "Medusa Wireless Sensing" \
+  "Wireless Sensing" \
+  "ML Systems" \
+  "LLM Post-Training" \
+  "ML Sys / EdgeFlow" \
+  "LLM RL Fine-Tuning" \
+  "EdgeFlow / CRANE" \
+  "EMBER / CPPO" \
   "Split to Fit / CRANE" \
   "EMBER / StoreAgent" \
-  "MEDUSA / Gemini" \
-  "NanoMind / Virgile"; do
+  "MEDUSA / Gemini"; do
   if grep -Fq -- "$old_project_label" "$NORMALIZED_INDEX"; then
     echo "FAIL: homepage should not use old mixed project label: $old_project_label" >&2
     exit 1

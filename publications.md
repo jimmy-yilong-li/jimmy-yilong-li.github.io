@@ -35,7 +35,7 @@ permalink: /publications/
               </h3>
               <p class="publication-page-meta">
                 {{ post.authors }}<br />
-                <span>{{ post.venue }}</span>
+                <strong class="publication-venue">{{ post.venue }}</strong>
                 {% if post.note %}
                   <span class="publication-note">{{ post.note }}</span>
                 {% endif %}
@@ -89,7 +89,7 @@ permalink: /publications/
               </h3>
               <p class="publication-page-meta">
                 {{ post.authors }}<br />
-                <span>{{ post.venue }}</span>
+                <strong class="publication-venue">{{ post.venue }}</strong>
                 {% if post.note %}
                   <span class="publication-note">{{ post.note }}</span>
                 {% endif %}

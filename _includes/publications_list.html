@@ -20,7 +20,7 @@
           <a href="{{ post.url }}"><h3>{{ post.title }}</h3></a>
           <p class="publication-meta">
             {{ post.authors }}<br />
-            <span>{{ post.venue }}</span> · <span>{{ post.date | date: "%Y" }}</span>
+            <strong class="publication-venue">{{ post.venue }}</strong> · <span>{{ post.date | date: "%Y" }}</span>
           </p>
           {% if post.abstract %}
           <p>{{ post.abstract | strip_html | truncate: 220 }}</p>

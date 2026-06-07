@@ -264,11 +264,30 @@ img {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.research-line-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.project-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .project-image,
 .publication-image {
   aspect-ratio: 16 / 10;
   object-fit: cover;
   width: 100%;
+}
+
+.project-image--diagram {
+  aspect-ratio: auto;
+  background: #fff;
+  border-bottom: 1px solid rgba(214, 203, 183, 0.8);
+  box-sizing: border-box;
+  object-fit: contain;
+  padding: 0.9rem;
 }
 
 .project-card-body,
@@ -299,6 +318,11 @@ img {
 .publication-meta {
   color: var(--text-soft);
   margin: 0.6rem 0 0.75rem;
+}
+
+.publication-venue {
+  color: var(--text);
+  font-weight: 700;
 }
 
 .publication-links {
@@ -544,7 +568,8 @@ span.highlight {
   }
 
   .theme-grid,
-  .project-grid {
+  .project-grid,
+  .research-line-grid {
     grid-template-columns: 1fr;
   }
 }
