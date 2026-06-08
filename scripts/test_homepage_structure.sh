@@ -194,8 +194,9 @@ assert_blog_contains "Ongoing"
 assert_blog_contains "Prototype"
 
 assert_publications_contains ">Publications<"
-assert_publications_contains "Journal Papers"
-assert_publications_contains "Conference Papers"
+assert_publications_contains "On-Device AI"
+assert_publications_contains "Agentic AI for Small LLMs"
+assert_publications_contains "Wireless Sensing"
 assert_publications_contains "Cast a Wider Net: Coordinated Pass@K Policy Optimization for Code Reasoning"
 assert_publications_contains "Coordinated Pass@K Policy Optimization"
 assert_publications_contains "<strong class=\"publication-venue\">MobiCom 2025</strong>"
@@ -208,7 +209,6 @@ assert_publications_contains "arXiv"
 assert_publications_contains "href=\"/pdfs/EMBER_Li.pdf\">PDF"
 assert_publications_contains "Enabling Wideband, Mobile Spectrum Sensing through Onboard Heterogeneous Computing"
 assert_publications_contains "Tiny but Mighty: A Software-Hardware Co-Design Approach for Efficient Multimodal Inference on Battery-Powered Small Devices"
-assert_publications_contains "Split to Fit: Cross-Accelerator Hybrid Quantization for Efficient Video Understanding on Edge Systems"
 assert_publications_contains "Sustainable Spectrum Crowdsensing"
 assert_publications_contains "IEEE Transactions on Networking (ToN) 2026"
 assert_publications_contains "Journal version"
@@ -230,15 +230,26 @@ if grep -Fq -- "et al." "$NORMALIZED_PUBLICATIONS"; then
   exit 1
 fi
 
+if grep -Fq -- "Split to Fit: Cross-Accelerator Hybrid Quantization for Efficient Video Understanding on Edge Systems" "$NORMALIZED_PUBLICATIONS"; then
+  echo "FAIL: Split to Fit should stay hidden until publication" >&2
+  exit 1
+fi
+
+if grep -Fq -- "Submitted" "$NORMALIZED_PUBLICATIONS"; then
+  echo "FAIL: hidden submitted papers should not appear in publications" >&2
+  exit 1
+fi
+
 if grep -Fq -- "In Submission" "$NORMALIZED_PUBLICATIONS"; then
   echo "FAIL: EMBER should be listed as an arXiv preprint, not In Submission" >&2
   exit 1
 fi
 
-conference_pos="$(grep -b -o "Conference Papers" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
-journal_pos="$(grep -b -o "Journal Papers" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
-if [[ -z "$conference_pos" || -z "$journal_pos" || "$conference_pos" -gt "$journal_pos" ]]; then
-  echo "FAIL: Conference Papers should appear before Journal Papers" >&2
+on_device_pos="$(grep -b -o "On-Device AI" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
+agentic_pos="$(grep -b -o "Agentic AI for Small LLMs" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
+wireless_pos="$(grep -b -o "Wireless Sensing" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
+if [[ -z "$on_device_pos" || -z "$agentic_pos" || -z "$wireless_pos" || "$on_device_pos" -gt "$agentic_pos" || "$agentic_pos" -gt "$wireless_pos" ]]; then
+  echo "FAIL: publication areas should appear as On-Device AI, Agentic AI for Small LLMs, then Wireless Sensing" >&2
   exit 1
 fi
 

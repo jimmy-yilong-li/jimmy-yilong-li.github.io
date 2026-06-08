@@ -4,6 +4,7 @@ title: "Enabling Wideband, Mobile Spectrum Sensing through Onboard Heterogeneous
 date: 2021-01-31
 image: /images/spectrum.jpg
 venue: "HotMobile 2021"
+publication_area: "Wireless Sensing"
 authors: "<strong>Yilong Li</strong>, Yijing Zeng, Suman Banerjee"
 link: https://dl.acm.org/doi/10.1145/3446382.3448651
 arxiv: ""
