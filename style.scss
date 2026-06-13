@@ -162,6 +162,21 @@ img {
   max-width: 52rem;
 }
 
+.hero-slogan {
+  background: rgba(240, 233, 220, 0.46);
+  border: 1px solid rgba(214, 203, 183, 0.82);
+  border-left: 4px solid rgba(95, 143, 192, 0.55);
+  border-radius: 16px;
+  color: rgba(31, 29, 26, 0.68);
+  font-size: 0.98rem;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.65;
+  margin: 1.1rem 0 1.2rem;
+  max-width: 52rem;
+  padding: 0.9rem 1rem;
+}
+
 .hero-supporting {
   margin-bottom: 0.85rem;
   max-width: 48rem;

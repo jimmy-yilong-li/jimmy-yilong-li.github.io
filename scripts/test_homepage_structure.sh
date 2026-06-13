@@ -135,6 +135,8 @@ assert_contains "href=\"/pdfs/Re-Mind_for_pitch.pdf\">Re-Mind Slides"
 assert_contains "favicon.ico"
 assert_contains "systems researcher who builds both hardware and software"
 assert_contains "on-device AI, reinforcement-learning post-training"
+assert_contains "AI must not be locked inside corporate black boxes. Free intelligence that people themselves can run, study, modify, reproduce, share, and trust."
+assert_contains "<blockquote class=\"hero-slogan\">"
 assert_contains "Three current research lines"
 assert_contains "<p class=\"project-kicker\">RL Finetuning for Small Models</p>"
 assert_contains "<p class=\"project-kicker\">Wireless Human Sensing</p>"
@@ -158,6 +160,14 @@ selected_publications_pos="$(grep -b -o "Selected Publications" "$NORMALIZED_IND
 research_projects_pos="$(grep -b -o "Research Projects" "$NORMALIZED_INDEX" | head -n 1 | cut -d: -f1)"
 if [[ -z "$selected_publications_pos" || -z "$research_projects_pos" || "$selected_publications_pos" -gt "$research_projects_pos" ]]; then
   echo "FAIL: Selected Publications should appear before Research Projects on the homepage" >&2
+  exit 1
+fi
+
+remind_slides_pos="$(grep -b -o "Re-Mind Slides" "$NORMALIZED_INDEX" | head -n 1 | cut -d: -f1)"
+slogan_pos="$(grep -b -o "<blockquote class=\"hero-slogan\">" "$NORMALIZED_INDEX" | head -n 1 | cut -d: -f1)"
+hero_links_pos="$(grep -b -o "<div class=\"hero-links\">" "$NORMALIZED_INDEX" | head -n 1 | cut -d: -f1)"
+if [[ -z "$remind_slides_pos" || -z "$slogan_pos" || -z "$hero_links_pos" || "$remind_slides_pos" -gt "$slogan_pos" || "$slogan_pos" -gt "$hero_links_pos" ]]; then
+  echo "FAIL: homepage slogan should appear as a quote box at the bottom of the bio before profile links" >&2
   exit 1
 fi
 
