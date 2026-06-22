@@ -255,11 +255,11 @@ if grep -Fq -- "In Submission" "$NORMALIZED_PUBLICATIONS"; then
   exit 1
 fi
 
-on_device_pos="$(grep -b -o "On-Device AI" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
 agentic_pos="$(grep -b -o "Agentic AI for Small LLMs" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
+on_device_pos="$(grep -b -o "On-Device AI" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
 wireless_pos="$(grep -b -o "Wireless Sensing" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
-if [[ -z "$on_device_pos" || -z "$agentic_pos" || -z "$wireless_pos" || "$on_device_pos" -gt "$agentic_pos" || "$agentic_pos" -gt "$wireless_pos" ]]; then
-  echo "FAIL: publication areas should appear as On-Device AI, Agentic AI for Small LLMs, then Wireless Sensing" >&2
+if [[ -z "$agentic_pos" || -z "$on_device_pos" || -z "$wireless_pos" || "$agentic_pos" -gt "$on_device_pos" || "$on_device_pos" -gt "$wireless_pos" ]]; then
+  echo "FAIL: publication areas should appear as Agentic AI for Small LLMs, On-Device AI, then Wireless Sensing" >&2
   exit 1
 fi
 

@@ -14,7 +14,7 @@ permalink: /publications/
   </div>
 
   {% assign posts = site.papers | sort: "date" | reverse %}
-  {% assign publication_areas = "On-Device AI|Agentic AI for Small LLMs|Wireless Sensing" | split: "|" %}
+  {% assign publication_areas = "Agentic AI for Small LLMs|On-Device AI|Wireless Sensing" | split: "|" %}
   <div class="publication-page-list">
     {% for area in publication_areas %}
     <section class="publication-section-group" aria-labelledby="{{ area | slugify }}">
