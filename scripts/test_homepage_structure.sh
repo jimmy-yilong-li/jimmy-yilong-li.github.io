@@ -133,8 +133,9 @@ assert_contains "Re-Mind"
 assert_contains "real-world episodic memory"
 assert_contains "href=\"/pdfs/Re-Mind_for_pitch.pdf\">Re-Mind Slides"
 assert_contains "favicon.ico"
-assert_contains "systems researcher who builds both hardware and software"
-assert_contains "on-device AI, reinforcement-learning post-training"
+assert_contains "systems researcher building hardware, software, and models"
+assert_contains "efficient LLM inference, RL post-training, and wireless systems"
+assert_contains "The shift from frontier AI models to smaller, deployable AI systems"
 assert_contains "AI must not be locked inside corporate black boxes. Free intelligence that people themselves can run, study, modify, reproduce, share, and trust."
 assert_contains "<blockquote class=\"hero-slogan\">"
 assert_contains "Three current research lines"
@@ -173,6 +174,11 @@ fi
 
 if grep -Fq -- "publication-image" "$NORMALIZED_INDEX"; then
   echo "FAIL: selected publications should not render thumbnail images on the homepage" >&2
+  exit 1
+fi
+
+if grep -Fq -- "advised by" "$NORMALIZED_INDEX"; then
+  echo "FAIL: homepage should not display advisor text" >&2
   exit 1
 fi
 
