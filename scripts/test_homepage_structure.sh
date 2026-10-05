@@ -18,6 +18,7 @@ ACCELERATOR_POST_HTML="$BUILD_DIR/what-we-learned-the-hard-way-about-npus-gpus-a
 MEDUSA_PAPER_HTML="$BUILD_DIR/papers/2025-12-09-Medusa/index.html"
 FAVICON_FILE="$BUILD_DIR/favicon.ico"
 EMBER_PDF_FILE="$BUILD_DIR/pdfs/EMBER_Li.pdf"
+KNOWING_PDF_FILE="$BUILD_DIR/pdfs/knowing.pdf"
 REMIND_SLIDES_FILE="$BUILD_DIR/pdfs/Re-Mind_for_pitch.pdf"
 MMPUPIL_IMAGE_FILE="$BUILD_DIR/images/mmpupil-system.png"
 NORMALIZED_INDEX="$BUILD_DIR/index.normalized.txt"
@@ -39,6 +40,11 @@ fi
 
 if [[ ! -f "$EMBER_PDF_FILE" ]]; then
   echo "FAIL: generated EMBER PDF not found at $EMBER_PDF_FILE" >&2
+  exit 1
+fi
+
+if [[ ! -f "$KNOWING_PDF_FILE" ]]; then
+  echo "FAIL: generated Knowing PDF not found at $KNOWING_PDF_FILE" >&2
   exit 1
 fi
 
@@ -98,6 +104,106 @@ assert_contains() {
   fi
 }
 
+assert_publication_article_contains() {
+  local html="$1"
+  local article_open="$2"
+  local context="$3"
+  local marker="$4"
+  shift 4
+
+  local remaining
+  local article
+  local article_body
+  local needle
+
+  remaining="$html"
+
+  while [[ "$remaining" == *"$article_open"* ]]; do
+    remaining="${remaining#*"$article_open"}"
+    article_body="${remaining%%"</article>"*}"
+
+    if [[ "$article_body" == *"$article_open"* ]]; then
+      echo "FAIL: malformed $context HTML: found another publication article before closing </article>" >&2
+      exit 1
+    fi
+
+    if [[ "$remaining" != *"</article>"* ]]; then
+      echo "FAIL: malformed $context HTML: publication article is missing </article>" >&2
+      exit 1
+    fi
+
+    article="$article_open$article_body</article>"
+
+    if [[ "$article" == *"$marker"* ]]; then
+      for needle in "$@"; do
+        if [[ "$article" != *"$needle"* ]]; then
+          echo "FAIL: expected $context containing '$marker' to contain: $needle" >&2
+          exit 1
+        fi
+      done
+      return
+    fi
+
+    remaining="${remaining#*"</article>"}"
+  done
+
+  echo "FAIL: $context not found for marker: $marker" >&2
+  exit 1
+}
+
+assert_section_publication_contains() {
+  local html="$1"
+  local section_prefix="$2"
+  local article_open="$3"
+  local context="$4"
+  shift 4
+
+  local remaining
+  local section_open
+  local section
+
+  remaining="$html"
+
+  if [[ "$remaining" != *"$section_prefix"* ]]; then
+    echo "FAIL: $context not found" >&2
+    exit 1
+  fi
+
+  remaining="${remaining#*"$section_prefix"}"
+
+  if [[ "$remaining" != *">"* ]]; then
+    echo "FAIL: malformed $context HTML: section opening tag is missing >" >&2
+    exit 1
+  fi
+
+  section_open="$section_prefix${remaining%%">"*}>"
+  remaining="${remaining#*">"}"
+
+  if [[ "$remaining" != *"</section>"* ]]; then
+    echo "FAIL: malformed $context HTML: section is missing </section>" >&2
+    exit 1
+  fi
+
+  section="$section_open${remaining%%"</section>"*}</section>"
+
+  assert_publication_article_contains \
+    "$section" \
+    "$article_open" \
+    "$context publication" \
+    "$@"
+}
+
+assert_homepage_publication_contains() {
+  local article_open='<article class="publication-item publication-entry">'
+
+  assert_section_publication_contains \
+    "$(<"$NORMALIZED_INDEX")" \
+    '<section id="publications"' \
+    "$article_open" \
+    "homepage publications section" \
+    "$@"
+}
+
 assert_publications_contains() {
   local needle="$1"
 
@@ -105,6 +211,20 @@ assert_publications_contains() {
     echo "FAIL: expected publications page to contain: $needle" >&2
     exit 1
   fi
+}
+
+assert_publications_section_publication_contains() {
+  local section_id="$1"
+  shift
+
+  local article_open='<article class="publication-page-item publication-entry">'
+
+  assert_section_publication_contains \
+    "$(<"$NORMALIZED_PUBLICATIONS")" \
+    "<section class=\"publication-section-group\" aria-labelledby=\"$section_id\"" \
+    "$article_open" \
+    "publications section '$section_id'" \
+    "$@"
 }
 
 assert_projects_contains() {
@@ -153,7 +273,7 @@ assert_contains "href=\"/pdfs/Re-Mind_for_pitch.pdf\">Re-Mind Slides"
 assert_contains "favicon.ico"
 assert_contains "systems researcher building hardware, software, and models"
 assert_contains "efficient LLM inference, RL post-training, and wireless systems"
-assert_contains "pursuing my Ph.D. at the University of Wisconsin-Madison"
+assert_contains "obtained my Ph.D. from the University of Wisconsin-Madison"
 assert_contains "href=\"https://pages.cs.wisc.edu/~suman/\""
 assert_contains "Prof. Suman Banerjee"
 assert_contains "spent several years building MIMO radar systems"
@@ -178,6 +298,12 @@ assert_contains "EMBER"
 assert_contains "Cast a Wider Net: Coordinated Pass@K Policy Optimization for Code Reasoning"
 assert_contains "CPPO was accepted to EMNLP 2026"
 assert_contains "<strong class=\"publication-venue\">EMNLP 2026</strong>"
+assert_homepage_publication_contains \
+  'href="/papers/2026-09-28-knowing/">Details' \
+  "Knowing Is Not Choosing: What Explicit Verification Adds Beyond Generative Preference" \
+  "<strong>Yilong Li</strong>, Chengpo Yan, Aayan Arish, Suman Banerjee" \
+  "<strong class=\"publication-venue\">arXiv preprint, 2026</strong>" \
+  'href="/pdfs/knowing.pdf">PDF'
 assert_contains "publication-entry"
 assert_contains "<strong class=\"publication-venue\">MobiCom 2025</strong>"
 assert_contains "CRANE is now open-sourced for direct Apple Neural Engine inference without Core ML."
@@ -188,6 +314,11 @@ assert_contains "LiveTag: Sensing Human-Object Interaction through Passive Chipl
 assert_contains "href=\"/publications/\""
 assert_contains "href=\"/projects/\""
 assert_contains "href=\"/blog/\""
+
+if grep -Fq -- "pursuing my Ph.D." "$NORMALIZED_INDEX"; then
+  echo "FAIL: homepage bio should describe the Ph.D. as completed" >&2
+  exit 1
+fi
 
 hero_statement_count="$(awk -F'class=\"hero-statement\"' '{count += NF - 1} END {print count}' "$NORMALIZED_INDEX")"
 if [[ "$hero_statement_count" -ne 2 ]]; then
@@ -282,10 +413,25 @@ if grep -Fq -- "unpublished internal experiments" "$NORMALIZED_ACCELERATOR_POST"
 fi
 
 assert_publications_contains ">Publications<"
+assert_publications_contains "Efficient AI / Agentic AI / Interpretability"
 assert_publications_contains "On-Device AI"
-assert_publications_contains "Agentic AI for Small LLMs"
 assert_publications_contains "Wireless Sensing"
 assert_publications_contains "publication-page-item publication-entry"
+assert_publications_section_publication_contains \
+  "efficient-ai-agentic-ai-interpretability" \
+  'href="/papers/2026-09-28-knowing/">Details' \
+  "Knowing Is Not Choosing: What Explicit Verification Adds Beyond Generative Preference" \
+  "<strong>Yilong Li</strong>, Chengpo Yan, Aayan Arish, Suman Banerjee" \
+  "<strong class=\"publication-venue\">arXiv preprint, 2026</strong>" \
+  'href="/pdfs/knowing.pdf">PDF'
+assert_publications_section_publication_contains \
+  "efficient-ai-agentic-ai-interpretability" \
+  'href="/papers/2026-05-26-cppo/">Details' \
+  "Cast a Wider Net: Coordinated Pass@K Policy Optimization for Code Reasoning"
+assert_publications_section_publication_contains \
+  "efficient-ai-agentic-ai-interpretability" \
+  'href="/papers/2026-05-07-ember/">Details' \
+  "EMBER: Efficient Memory via Budgeted Evidence Retention for Long-Horizon Agents"
 assert_publications_contains "Cast a Wider Net: Coordinated Pass@K Policy Optimization for Code Reasoning"
 assert_publications_contains "Coordinated Pass@K Policy Optimization"
 assert_publications_contains "<strong class=\"publication-venue\">EMNLP 2026</strong>"
@@ -335,13 +481,32 @@ if grep -Fq -- "In Submission" "$NORMALIZED_PUBLICATIONS"; then
   exit 1
 fi
 
-agentic_pos="$(grep -b -o "Agentic AI for Small LLMs" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
-on_device_pos="$(grep -b -o "On-Device AI" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
-wireless_pos="$(grep -b -o "Wireless Sensing" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1)"
-if [[ -z "$agentic_pos" || -z "$on_device_pos" || -z "$wireless_pos" || "$agentic_pos" -gt "$on_device_pos" || "$on_device_pos" -gt "$wireless_pos" ]]; then
-  echo "FAIL: publication areas should appear as Agentic AI for Small LLMs, On-Device AI, then Wireless Sensing" >&2
+efficient_agentic_heading='<h2 class="publication-section-heading" id="efficient-ai-agentic-ai-interpretability">Efficient AI / Agentic AI / Interpretability</h2>'
+on_device_heading='<h2 class="publication-section-heading" id="on-device-ai">On-Device AI</h2>'
+wireless_heading='<h2 class="publication-section-heading" id="wireless-sensing">Wireless Sensing</h2>'
+
+heading_position() {
+  local heading="$1"
+
+  grep -F -b -o -- "$heading" "$NORMALIZED_PUBLICATIONS" | head -n 1 | cut -d: -f1 || true
+}
+
+efficient_agentic_pos="$(heading_position "$efficient_agentic_heading")"
+on_device_pos="$(heading_position "$on_device_heading")"
+wireless_pos="$(heading_position "$wireless_heading")"
+if [[ -z "$efficient_agentic_pos" || -z "$on_device_pos" || -z "$wireless_pos" || "$efficient_agentic_pos" -gt "$on_device_pos" || "$on_device_pos" -gt "$wireless_pos" ]]; then
+  echo "FAIL: publication areas should appear as Efficient AI / Agentic AI / Interpretability, On-Device AI, then Wireless Sensing" >&2
   exit 1
 fi
+
+for retired_heading in \
+  '<h2 class="publication-section-heading" id="ai-interpretability">AI Interpretability</h2>' \
+  '<h2 class="publication-section-heading" id="agentic-ai-for-small-llms">Agentic AI for Small LLMs</h2>'; do
+  if grep -Fq -- "$retired_heading" "$NORMALIZED_PUBLICATIONS"; then
+    echo "FAIL: retired publication heading should not be rendered: $retired_heading" >&2
+    exit 1
+  fi
+done
 
 for old_publication in \
   "A Qi Wireless Charging Based System for Robust User-Initiated Indoor Location Services" \
