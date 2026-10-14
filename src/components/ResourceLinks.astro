@@ -1,0 +1,10 @@
+---
+import Icon from './Icon.astro';
+import type { Resource } from '../data/types';
+interface Props { resources: Resource[]; compact?: boolean; }
+const { resources, compact = false } = Astro.props;
+const iconFor = (label: string) => /code|github/i.test(label) ? 'code' : /pdf|slides/i.test(label) ? 'file' : 'diagonal';
+---
+{resources.length > 0 && <div class:list={['resource-links', { 'resource-links--compact': compact }]}>
+  {resources.map(resource => <a href={resource.href}><Icon name={iconFor(resource.label)} size={15} />{resource.label}</a>)}
+</div>}

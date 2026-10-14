@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PublicationEntry from '../components/PublicationEntry.astro';
+import Icon from '../components/Icon.astro';
+import papers from '../data/publications.json';
+import { publicationAreas, slugify } from '../lib/content.mjs';
+---
+<BaseLayout title="Publications | Yilong Li" description="Publications on efficient AI, on-device LLMs and VLMs, agentic memory, and wireless sensing systems.">
+  <div class="shell">
+    <header class="page-heading reveal">
+      <p class="eyebrow">Research record / 2016 onwards</p>
+      <h1>Publications<span class="title-dot">.</span></h1>
+      <div class="page-heading-bottom"><p>Hardware, software, and models.<br />A complete record, grouped by research direction.</p><a class="quiet-link" href="https://scholar.google.com/citations?user=G6P9aMQAAAAJ&hl=en">Google Scholar <Icon name="diagonal" size={16} /></a></div>
+    </header>
+    <nav class="area-navigation" aria-label="Publication categories">
+      {publicationAreas.map((area, index) => <a href={`#${slugify(area)}`}><span>{String(index + 1).padStart(2, '0')}</span>{area}</a>)}
+    </nav>
+    <div class="publication-groups">
+      {publicationAreas.map(area => <section id={slugify(area)} class="publication-group">
+        <div class="publication-group-heading"><h2>{area}</h2><span>{papers.filter(paper => paper.area === area).length} papers</span></div>
+        {papers.filter(paper => paper.area === area).map(paper => <PublicationEntry paper={paper} />)}
+      </section>)}
+    </div>
+  </div>
+</BaseLayout>

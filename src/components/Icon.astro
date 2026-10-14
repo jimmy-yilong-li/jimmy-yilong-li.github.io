@@ -1,0 +1,21 @@
+---
+interface Props { name: string; size?: number; class?: string; }
+const { name, size = 20, class: className = '' } = Astro.props;
+const paths: Record<string, string> = {
+  arrow: 'M5 12h14M13 6l6 6-6 6',
+  diagonal: 'M6 18 18 6M6 6h12v12',
+  back: 'M19 12H5m6 6-6-6 6-6',
+  mail: 'M4 5h16v14H4zM4 6l8 6 8-6',
+  book: 'M4 4h6a3 3 0 0 1 3 3v14a4 4 0 0 0-4-3H4zm9 3a3 3 0 0 1 3-3h5v14h-4a4 4 0 0 0-4 3',
+  code: 'm8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16',
+  file: 'M5 3h9l5 5v13H5zm9 0v6h5M8 14h8m-8 3h6',
+  clock: 'M12 8v5l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0',
+  menu: 'M4 7h16M4 12h16M4 17h16',
+  close: 'm6 6 12 12M18 6 6 18',
+  sun: 'M12 3V1m0 22v-2M3 12H1m22 0h-2M5.6 5.6 4.2 4.2m15.6 15.6-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M17 12a5 5 0 1 1-10 0 5 5 0 0 1 10 0',
+  link: 'm10 13 4-4m-6 7-2 2a4 4 0 0 1-6-6l4-4m6 0 2-2a4 4 0 0 1 6 6l-4 4',
+};
+---
+<svg class={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d={paths[name] ?? paths.diagonal} />
+</svg>

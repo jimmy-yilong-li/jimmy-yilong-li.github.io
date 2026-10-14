@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResourceLinks from '../../components/ResourceLinks.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import Icon from '../../components/Icon.astro';
+import { works } from '../../data/works';
+import papers from '../../data/publications.json';
+import { displayImage } from '../../lib/content.mjs';
+
+export function getStaticPaths() {
+  return works.map(work => ({ params: { slug: work.slug }, props: { work } }));
+}
+const { work } = Astro.props;
+const paper = papers.find(item => item.id === work.publicationId);
+const authors = paper?.authors ?? work.authorHtml;
+const resources = [...work.resources];
+for (const resource of paper?.resources ?? []) {
+  if (!resources.some(item => item.href === resource.href)) resources.push(resource);
+}
+const related = (work.related ?? []).map(slug => works.find(item => item.slug === slug)).filter(Boolean);
+---
+<BaseLayout title={`${work.name} | Yilong Li`} description={work.summary} image={work.cover}>
+  <div class="shell">
+    <header class="work-header reveal">
+      <a class="back-link" href="/#selected-work"><Icon name="back" size={16} />Selected work</a>
+      <p class="eyebrow">{work.category} / {work.venue}</p>
+      <h1>{work.name}<span class="title-dot">.</span></h1>
+      <p class="work-title">{work.title}</p>
+      <p class="work-summary">{work.summary}</p>
+      {authors && <p class="work-authors" set:html={authors} />}
+      {work.slug === 'livetag' && <p class="contribution-note">* Equal contribution</p>}
+      <ResourceLinks resources={resources} />
+    </header>
+    <figure class:list={['work-hero-figure', `work-cover--${work.slug}`]}>
+      <img src={displayImage(work.cover)} alt={work.coverAlt} width="1200" height="750" style={`object-fit:contain;object-position:${work.coverPosition ?? 'center'}`} />
+      <figcaption>{work.imageCaption}</figcaption>
+    </figure>
+    <div class="article-layout">
+      <article class="research-article prose">
+        {work.highlights && <div class="research-highlights" aria-label="Reported findings">
+          {work.highlights.map(item => <div><strong>{item.value}</strong><span>{item.label}</span>{item.note && <small>{item.note}</small>}</div>)}
+        </div>}
+        {work.sections.map(section => <section id={section.id}>
+          <h2>{section.title}</h2>
+          {section.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+          {section.bullets && <ul>{section.bullets.map(bullet => <li>{bullet}</li>)}</ul>}
+          {section.image && <figure><img src={displayImage(section.image.src)} alt={section.image.alt} loading="lazy" width="1200" height="700" /><figcaption>{section.image.caption}</figcaption></figure>}
+        </section>)}
+        {paper?.abstract && <details class="abstract-details"><summary>Read the paper abstract</summary>{paper.abstract.split(/\n\s*\n|\n/).filter(Boolean).map(paragraph => <p>{paragraph}</p>)}</details>}
+        <div class="article-resources"><h2 id="resources">Resources</h2><ResourceLinks resources={resources} />{resources.length === 0 && <p>Publication metadata is available in the <a href="/publications/">publication list</a>.</p>}</div>
+      </article>
+      <aside class="contents-nav" aria-label="On this page"><p>On this page</p><ol>{work.sections.map(section => <li><a href={`#${section.id}`}>{section.title}</a></li>)}<li><a href="#resources">Resources</a></li></ol><a class="contents-all" href="/publications/">Publication list <Icon name="diagonal" size={14} /></a></aside>
+    </div>
+    {related.length > 0 && <section class="related-work"><div class="section-heading"><div><p class="eyebrow">Keep exploring</p><h2>Connected work.</h2></div></div><div class="work-grid work-grid--related">{related.map((item, index) => <WorkCard work={item!} index={index} />)}</div></section>}
+  </div>
+</BaseLayout>

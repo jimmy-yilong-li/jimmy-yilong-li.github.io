@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-labelledby="memory-title memory-desc">
+  <title id="memory-title">CPU, GPU, and NPU share one memory and bandwidth pool</title>
+  <desc id="memory-desc">Three distinct compute engines, labeled CPU, GPU, and NPU, connect through paired routing lanes to a common memory controller and one shared memory pool. The lanes converge into one bounded channel labeled Shared bandwidth, emphasizing that all three engines compete for finite memory bandwidth. The symbols are conceptual, not device architecture specifications. Shared physical memory does not imply universal zero-copy interoperability or unlimited concurrent throughput.</desc>
+
+  <rect width="900" height="560" fill="#f7f8f4"/>
+  <g aria-hidden="true" fill="none" stroke="#dce5d8" stroke-width="1.5">
+    <path d="M 665 0 C 721 71 843 79 900 160"/>
+    <path d="M 706 0 C 756 46 863 58 900 118"/>
+    <path d="M 751 0 C 793 25 879 35 900 75"/>
+    <path d="M 0 408 C 41 374 53 340 53 298 V 162"/>
+    <path d="M 0 448 C 70 399 72 365 72 319"/>
+  </g>
+
+  <g font-family="sans-serif" fill="#142d2a">
+    <text x="54" y="80" font-size="36" font-weight="600" letter-spacing="-0.7">One pool. Three engines.</text>
+
+    <!-- The engine motifs distinguish roles without specifying hardware. -->
+    <g>
+      <g aria-hidden="true" fill="none" stroke="#142d2a" stroke-width="3" stroke-linecap="round">
+        <path d="M 144 128 V 139 M 169 128 V 139 M 194 128 V 139 M 219 128 V 139"/>
+        <path d="M 144 273 V 284 M 169 273 V 284 M 194 273 V 284 M 219 273 V 284"/>
+        <path d="M 93 174 H 105 M 93 199 H 105 M 93 224 H 105 M 259 174 H 271 M 259 199 H 271 M 259 224 H 271"/>
+      </g>
+      <rect x="105" y="139" width="154" height="134" rx="19" fill="#ebf0e8" stroke="#142d2a" stroke-width="2.5"/>
+      <g aria-hidden="true" fill="#142d2a">
+        <rect x="150" y="163" width="26" height="26" rx="4"/>
+        <rect x="186" y="163" width="26" height="26" rx="4"/>
+        <rect x="150" y="199" width="26" height="13" rx="3" fill="#9ab8a7"/>
+        <rect x="186" y="199" width="26" height="13" rx="3" fill="#9ab8a7"/>
+      </g>
+      <text x="182" y="250" text-anchor="middle" font-size="34" font-weight="600">CPU</text>
+    </g>
+
+    <g>
+      <g aria-hidden="true" fill="none" stroke="#39766a" stroke-width="3" stroke-linecap="round">
+        <path d="M 412 128 V 139 M 437 128 V 139 M 462 128 V 139 M 487 128 V 139"/>
+        <path d="M 412 273 V 284 M 437 273 V 284 M 462 273 V 284 M 487 273 V 284"/>
+        <path d="M 361 174 H 373 M 361 199 H 373 M 361 224 H 373 M 527 174 H 539 M 527 199 H 539 M 527 224 H 539"/>
+      </g>
+      <rect x="373" y="139" width="154" height="134" rx="19" fill="#39766a"/>
+      <g aria-hidden="true" fill="#dce5d8">
+        <rect x="410" y="164" width="17" height="17" rx="3"/>
+        <rect x="442" y="164" width="17" height="17" rx="3"/>
+        <rect x="474" y="164" width="17" height="17" rx="3"/>
+        <rect x="410" y="193" width="17" height="17" rx="3"/>
+        <rect x="442" y="193" width="17" height="17" rx="3"/>
+        <rect x="474" y="193" width="17" height="17" rx="3"/>
+      </g>
+      <text x="450" y="250" text-anchor="middle" font-size="34" font-weight="600" fill="#f7f8f4">GPU</text>
+    </g>
+
+    <g>
+      <g aria-hidden="true" fill="none" stroke="#142d2a" stroke-width="3" stroke-linecap="round">
+        <path d="M 680 128 V 139 M 705 128 V 139 M 730 128 V 139 M 755 128 V 139"/>
+        <path d="M 680 273 V 284 M 705 273 V 284 M 730 273 V 284 M 755 273 V 284"/>
+        <path d="M 629 174 H 641 M 629 199 H 641 M 629 224 H 641 M 795 174 H 807 M 795 199 H 807 M 795 224 H 807"/>
+      </g>
+      <rect x="641" y="139" width="154" height="134" rx="19" fill="#f4e6d8" stroke="#142d2a" stroke-width="2.5"/>
+      <g aria-hidden="true" stroke="#142d2a" stroke-width="2.5" stroke-linejoin="round">
+        <path d="M 685 187 L 718 168 L 751 187 L 718 207 Z M 685 187 H 751 M 718 168 V 207" fill="none"/>
+        <circle cx="685" cy="187" r="7" fill="#e4a26a"/>
+        <circle cx="718" cy="168" r="7" fill="#e4a26a"/>
+        <circle cx="751" cy="187" r="7" fill="#e4a26a"/>
+        <circle cx="718" cy="207" r="7" fill="#e4a26a"/>
+      </g>
+      <text x="718" y="250" text-anchor="middle" font-size="34" font-weight="600">NPU</text>
+    </g>
+  </g>
+
+  <!-- All routes converge at one finite channel, not separate memory pools. -->
+  <g aria-hidden="true" fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 175 284 V 298 Q 175 320 199 320 H 406 Q 431 320 431 344" stroke="#142d2a"/>
+    <path d="M 188 284 V 294 Q 188 307 207 307 H 409 Q 442 307 442 344" stroke="#9ab8a7"/>
+    <path d="M 444 284 V 344" stroke="#39766a"/>
+    <path d="M 456 284 V 344" stroke="#9ab8a7"/>
+    <path d="M 712 284 V 294 Q 712 307 693 307 H 491 Q 458 307 458 344" stroke="#d5b491"/>
+    <path d="M 725 284 V 298 Q 725 320 701 320 H 494 Q 469 320 469 344" stroke="#e4a26a"/>
+  </g>
+
+  <g aria-hidden="true">
+    <rect x="419" y="339" width="62" height="47" rx="9" fill="#dce5d8" stroke="#142d2a" stroke-width="2"/>
+    <path d="M 434 353 V 372 M 450 353 V 372 M 466 353 V 372" fill="none" stroke="#39766a" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 481 359 H 508" fill="none" stroke="#39766a" stroke-width="1.5"/>
+    <circle cx="481" cy="359" r="3" fill="#39766a"/>
+  </g>
+  <text x="520" y="369" font-family="sans-serif" font-size="28" fill="#142d2a">Shared bandwidth</text>
+
+  <g>
+    <rect x="94" y="384" width="712" height="108" rx="23" fill="#142d2a"/>
+    <text x="450" y="428" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="500" fill="#f7f8f4">Shared memory</text>
+    <g aria-hidden="true">
+      <rect x="149" y="449" width="86" height="17" rx="4" fill="#39766a"/>
+      <rect x="252" y="449" width="86" height="17" rx="4" fill="#9ab8a7"/>
+      <rect x="355" y="449" width="86" height="17" rx="4" fill="#39766a"/>
+      <rect x="459" y="449" width="86" height="17" rx="4" fill="#e4a26a"/>
+      <rect x="562" y="449" width="86" height="17" rx="4" fill="#39766a"/>
+      <rect x="665" y="449" width="86" height="17" rx="4" fill="#9ab8a7"/>
+    </g>
+  </g>
+  <text x="450" y="532" text-anchor="middle" font-family="sans-serif" font-size="27" fill="#142d2a">Finite bandwidth, shared by all three</text>
+</svg>

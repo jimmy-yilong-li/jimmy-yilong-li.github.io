@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import posts from '../../data/blog.json';
+import { formatDate } from '../../lib/content.mjs';
+---
+<BaseLayout title="Blog | Yilong Li" description="Technical writing and field notes on local AI, accelerators, inference runtimes, and wireless sensing.">
+  <div class="shell">
+    <header class="page-heading reveal"><p class="eyebrow">Technical writing / From the workbench</p><h1>Field notes<span class="title-dot">.</span></h1><p>Things learned by building, measuring, and getting it wrong.<br />Technical posts, research notes, and practical guides.</p></header>
+    <div class="blog-grid">{posts.map(post => <article class="blog-card"><a href={`/blog/${post.slug}/`}><div class="blog-cover"><img src={post.cover} alt="CPU, GPU, and NPU sharing one memory system" width="900" height="560" /><span class="cover-arrow"><Icon name="diagonal" /></span></div><div class="blog-card-body"><p class="card-meta"><time datetime={post.date}>{formatDate(post.date, true)}</time><span><Icon name="clock" size={13} />{post.minutes} min read</span></p><h2>{post.title}</h2><p>{post.summary}</p><span class="card-bottom">Read the note <Icon name="arrow" size={16} /></span></div></a></article>)}</div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,14 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { formatDate } from '../lib/content.mjs';
+const { frontmatter, headings: markdownHeadings } = Astro.props;
+const headings = markdownHeadings.filter((heading: any) => heading.depth === 2);
+---
+<BaseLayout title={`${frontmatter.title} | Yilong Li`} description={frontmatter.summary} image={frontmatter.cover}>
+  <div class="shell">
+    <header class="work-header blog-article-header"><a class="back-link" href="/blog/"><Icon name="back" size={16} />Field notes</a><p class="eyebrow">Systems note / {formatDate(String(frontmatter.date).slice(0, 10), true)} / {frontmatter.minutes} min read</p><h1>{frontmatter.title}</h1><p class="work-summary">{frontmatter.summary}</p><p class="work-authors">Yilong Li</p></header>
+    <figure class="blog-hero-figure"><img src={frontmatter.cover} alt="CPU, GPU, and NPU connected to one shared memory pool" width="900" height="560" /><figcaption>Different execution models. One shared memory system.</figcaption></figure>
+    <div class="article-layout"><article class="prose blog-prose"><slot /></article><aside class="contents-nav" aria-label="On this page"><p>On this page</p><ol>{headings.map((heading: any) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}</ol><a class="contents-all" href="/blog/">All field notes <Icon name="diagonal" size={14} /></a></aside></div>
+  </div>
+</BaseLayout>

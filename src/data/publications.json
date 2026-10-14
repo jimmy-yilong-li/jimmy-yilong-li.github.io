@@ -1,0 +1,236 @@
+[
+  {
+    "id": "2026-09-28-knowing",
+    "title": "Knowing Is Not Choosing: What Explicit Verification Adds Beyond Generative Preference",
+    "date": "2026-09-28",
+    "year": 2026,
+    "venue": "arXiv preprint, 2026",
+    "area": "Efficient AI / Agentic AI / Interpretability",
+    "authors": "<strong>Yilong Li</strong>, Chengpo Yan, Aayan Arish, Suman Banerjee",
+    "note": "arXiv",
+    "abstract": "",
+    "resources": [
+      {
+        "label": "PDF",
+        "href": "/pdfs/knowing.pdf"
+      }
+    ],
+    "bib": ""
+  },
+  {
+    "id": "2026-05-26-cppo",
+    "title": "Cast a Wider Net: Coordinated Pass@K Policy Optimization for Code Reasoning",
+    "date": "2026-05-26",
+    "year": 2026,
+    "venue": "EMNLP 2026",
+    "area": "Efficient AI / Agentic AI / Interpretability",
+    "authors": "<strong>Yilong Li</strong>, Suman Banerjee, Tong Che",
+    "note": "",
+    "abstract": "Repeated sampling with a verifier is a standard way to allocate test-time compute for code generation, but drawing K independent samples from one answer distribution often wastes the pass@K budget on near-duplicate reasoning paths.\nThis paper introduces Coordinated Pass@K Policy Optimization (CPPO), which turns pass@K generation into joint exploration over strategies. A planner emits a tuple of alternative high-level methods, and a shared solver attempts one solution per method. CPPO trains this joint planner-solver policy with a multiplicative planner reward that gives credit only when valid strategy tuples lead to verifier-confirmed pass@K success.\nAcross APPS, CodeContests, and LiveCodeBench-v6, CPPO improves pass@4 over direct sampling, planning baselines, planner-only SFT, and pass@K-oriented reinforcement learning under the same solver-attempt budget.",
+    "resources": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2605.27000"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2605.27000"
+      }
+    ],
+    "bib": ""
+  },
+  {
+    "id": "2026-05-07-ember",
+    "title": "EMBER: Efficient Memory via Budgeted Evidence Retention for Long-Horizon Agents",
+    "date": "2026-05-07",
+    "year": 2026,
+    "venue": "arXiv preprint, 2026",
+    "area": "Efficient AI / Agentic AI / Interpretability",
+    "authors": "<strong>Yilong Li</strong>, Suman Banerjee, Tong Che",
+    "note": "arXiv",
+    "abstract": "EMBER studies Budgeted Pre-Query Retention for long-horizon agents: an agent ingests a stream before future queries are known, keeps only a fixed budget of source evidence, and later answers from that retained memory without returning to the full raw history.\nThe system learns a retention policy that uses write-time answerability probes to identify source spans likely to support future answers. Instead of storing generic summaries or predicted future questions, EMBER stores evidence capsules: source excerpts paired with retrieval keys that remain searchable at read time.\nOn LongMemEval-RR, EMBER-14B reaches 0.3017 F1 at the 8192-token retained source budget, compared with 0.1765 F1 for the strongest non-EMBER budgeted baseline. The result reframes long-term agent memory as learned evidence retention under strict context and memory budgets.",
+    "resources": [
+      {
+        "label": "PDF",
+        "href": "/pdfs/EMBER_Li.pdf"
+      }
+    ],
+    "bib": ""
+  },
+  {
+    "id": "2026-02-01-sustainable-spectrum-crowdsensing-ton",
+    "title": "Sustainable Spectrum Crowdsensing",
+    "date": "2026-02-01",
+    "year": 2026,
+    "venue": "IEEE Transactions on Networking (ToN) 2026",
+    "area": "Wireless Sensing",
+    "authors": "Yijing Zeng, Bangya Liu, <strong>Yilong Li</strong>, Domenico Giustiniano, Suman Banerjee",
+    "note": "Journal version",
+    "abstract": "A journal article on sustainable spectrum crowdsensing for scalable wireless spectrum monitoring.",
+    "resources": [],
+    "bib": ""
+  },
+  {
+    "id": "2024-10-1-tinyllm",
+    "title": "Tiny but Mighty: A Software-Hardware Co-Design Approach for Efficient Multimodal Inference on Battery-Powered Small Devices",
+    "date": "2026-01-25",
+    "year": 2026,
+    "venue": "ICLR 2026",
+    "area": "On-Device AI",
+    "authors": "<strong>Yilong Li</strong>, Shuai Zhang, Yijing Zeng, Chengpo Yan, Hao Zhang, Xinmiao Xiong, Jingyu Liu, Pan Hu, Suman Banerjee",
+    "note": "",
+    "abstract": "Large Multimodal Models (LMMs) are inherently modular, comprising vision and audio encoders, a projector, and a language backbone. Yet existing systems execute them monolithically, underutilizing the heterogeneous accelerators (NPUs, GPUs, DSPs) on modern SoCs and inflating end-to-end latency. We present NANOMIND, a hardware-software co-design inference framework that decomposes each LMM into modular bricks - vision, projector, language, and audio - and maps each brick to its best-suited compute units. A Token-Aware Buffer Manager (TABM) enables zero-copy embedding transfer across accelerators on unified-memory SoCs, bypassing CPU bottlenecks. Combined with customized hardware, a battery-aware scheduler, and fused low-bit GEMM kernels, NANOMIND runs entirely on a compact, battery-powered prototype that operates fully offline. NANOMIND reduces end-to-end energy by 42.3% against mainstream edge frameworks and devkits; in its on-demand low-power mode, the prototype runs LLaVA-OneVision-Qwen2-0.5B with a camera for nearly 18.8 hours on a single 2,000 mAh battery.",
+    "resources": [
+      {
+        "label": "PDF",
+        "href": "/pdfs/nanomind-iclr2026.pdf"
+      },
+      {
+        "label": "ICLR",
+        "href": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/b20260e3e1bd7ea108831925d65ce0a6-Abstract-Conference.html"
+      }
+    ],
+    "bib": "",
+    "metadataSource": "https://proceedings.iclr.cc/paper_files/paper/2026/file/b20260e3e1bd7ea108831925d65ce0a6-Paper-Conference.pdf"
+  },
+  {
+    "id": "2025-12-09-Medusa",
+    "title": "Scalable Biometric Sensing in the Wild through Distributed MIMO Radars",
+    "date": "2025-12-09",
+    "year": 2025,
+    "venue": "MobiCom 2025",
+    "area": "Wireless Sensing",
+    "authors": "<strong>Yilong Li</strong>, Ramanujan K Sheshadri, Karthik Sundaresan, Eugene Chai, Yijing Zeng, Jayaram Raghuram, Suman Banerjee",
+    "note": "",
+    "abstract": "Radar-based techniques for detecting vital signs have shown promise for continuous contactless vital sign sensing and healthcare applications. However, real-world indoor environments face significant challenges for existing vital sign monitoring systems. These include signal blockage in non-line-of-sight (NLOS) situations, movement of human subjects, and alterations in location and orientation. Additionally, these existing systems failed to address the challenge of tracking multiple targets simultaneously. To overcome these challenges, we present MEDUSA, a novel coherent ultra-wideband (UWB) based distributed multiple-input multiple-output (MIMO) radar system, especially it allows users to customize and disperse the 16×16 into sub-arrays. MEDUSA takes advantage of the diversity benefits of distributed yet wirelessly synchronized MIMO arrays to enable robust vital sign monitoring in real-world and daily living environments where human targets are moving and surrounded by obstacles. We've developed a scalable, self-supervised contrastive learning model which integrates seamlessly with our hardware platform. Each attention weight within the model corresponds to a specific antenna pair of Tx and Rx. The model proficiently recovers accurate vital sign waveforms by decomposing and correlating the mixed received signals, including comprising human motion, mobility, noise, and vital signs. Through extensive evaluations involving 21 participants and over 200 hours of collected data (3.75 TB in total, with 1.89 TB for static subjects and 1.86 TB for moving subjects), MEDUSA's performance has been validated, showing an average gain of 20% compared to existing systems employing COTS radar sensors. This demonstrates MEDUSA's spatial diversity gain for real-world vital sign monitoring, encompassing target and environmental dynamics in familiar and unfamiliar indoor environments.",
+    "resources": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2310.05507"
+      },
+      {
+        "label": "PDF",
+        "href": "/pdfs/medusa_Li.pdf"
+      },
+      {
+        "label": "Code",
+        "href": "https://github.com/JimmyLi-Network/Medusa_UWB_MIMO"
+      }
+    ],
+    "bib": "@misc{li2024medusascalablebiometricsensing,\n      title={MEDUSA: Scalable Biometric Sensing in the Wild through Distributed MIMO Radars}, \n      author={Yilong Li and Ramanujan K Sheshadri and Karthik Sundaresan and Eugene Chai and Yijing Zeng and Jayaram Raghuram and Suman Banerjee},\n      year={2024},\n      eprint={2310.05507},\n      archivePrefix={arXiv},\n      primaryClass={cs.AR},\n      url={https://arxiv.org/abs/2310.05507}, \n    }"
+  },
+  {
+    "id": "2024-09-21-PalmBench",
+    "title": "PalmBench: A Comprehensive Benchmark of Compressed Large Language Models on Mobile Platforms",
+    "date": "2024-09-21",
+    "year": 2024,
+    "venue": "ICLR 2025",
+    "area": "On-Device AI",
+    "authors": "<strong>Yilong Li</strong>, Jingyu Liu, Hao Zhang, M Badri Narayanan, Utkarsh Sharma, Shuai Zhang, Pan Hu, Yijing Zeng, Bangya Liu, Jayaram Raghuram, Suman Banerjee",
+    "note": "",
+    "abstract": "Deploying large language models (LLMs) locally on mobile devices is advantageous in scenarios where transmitting data to remote cloud servers is either undesirable due to privacy concerns or impractical due to network connectivity. Recent  advancements have facilitated the local deployment of LLMs. However, local  deployment also presents challenges, particularly in balancing the (generative)  quality, latency, and throughput within the hardware constraints of mobile devices. In this paper, we introduce our lightweight, all-in-one automated benchmarking  framework that allows users to evaluate LLMs on mobile devices. We provide a  comprehensive benchmark of various popular LLMs with different quantization  configurations (both weights and activations), across multiple mobile platforms  with varying hardware capabilities. Unlike traditional benchmarks that assess  full-scale models on high-end GPU clusters, we focus on evaluating resource  efficiency (memory and power consumption) and harmful output for compressed  models on mobile devices. Our key observations include: i) differences in energy  efficiency and throughput across mobile platforms; ii) the impact of quantization  on memory usage, GPU execution time, and power consumption; iii) accuracy and  performance degradation of quantized models compared to their non-quantized  counterparts; and iv) the frequency of hallucinations and toxic content generated  by compressed LLMs on mobile devices.",
+    "resources": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2410.05315"
+      },
+      {
+        "label": "PDF",
+        "href": "/pdfs/palmbench.pdf"
+      }
+    ],
+    "bib": "@misc{li2024palmbenchcomprehensivebenchmarkcompressed,\n    title={PalmBench: A Comprehensive Benchmark of Compressed Large Language Models on Mobile Platforms}, \n    author={Yilong Li and Jingyu Liu and Hao Zhang and M Badri Narayanan and Utkarsh Sharma and Shuai Zhang and Pan Hu and Yijing Zeng and Bangya Liu and Jayaram Raghuram and Suman Banerjee},\n    year={2024},\n    eprint={2410.05315},\n    archivePrefix={arXiv},\n    primaryClass={cs.LG},\n    url={https://arxiv.org/abs/2410.05315}, \n}"
+  },
+  {
+    "id": "2024-05-15-sustainable-spectrum-crowdsensing-dyspan",
+    "title": "Sustainable Spectrum Crowdsensing",
+    "date": "2024-05-15",
+    "year": 2024,
+    "venue": "IEEE DySPAN 2024",
+    "area": "Wireless Sensing",
+    "authors": "Yijing Zeng, Bangya Liu, <strong>Yilong Li</strong>, Domenico Giustiniano, Suman Banerjee",
+    "note": "Conference version",
+    "abstract": "A conference paper on sustainable spectrum crowdsensing for mobile wireless spectrum monitoring.",
+    "resources": [],
+    "bib": ""
+  },
+  {
+    "id": "2023-09-26-Gemini",
+    "title": "Gemini: Integrating Full-fledged Sensing upon Millimeter Wave Communications",
+    "date": "2023-09-26",
+    "year": 2023,
+    "venue": "Under Review",
+    "area": "Wireless Sensing",
+    "authors": "<strong>Yilong Li</strong>, Zhe Chen, Jun Luo, Suman Banerjee",
+    "note": "",
+    "abstract": "Integrating millimeter wave (mmWave)technology in both communication and sensing is promising as it enables the reuse of existing spectrum and infrastructure without draining resources. Most existing systems piggyback sensing onto  conventional communication modes without fully exploiting the potential of integrated sensing and communication (ISAC) in mmWave radios (not full-fledged). In this paper, we design and implement a full-fledged mmWave ISAC system Gemini; it delivers raw channel states to serve a broad category of sensing applications. We first propose the mmWave self-interference cancellation approach to extract the weak reflected signals for near-field sensing purposes. Then, we develop a joint optimization scheduling framework that can be utilized in accurate radar sensing while maximizing the communication throughput. Finally, we design a united fusion sensing algorithm to offer a better sensing performance via combining monostatic and bistatic modes. We evaluate our system in extensive experiments to demonstrate Gemini's capability of simultaneously operating sensing and communication, enabling mmWave ISAC to perform better than the commercial off-the-shelf mmWave radar for 5G cellular networks.",
+    "resources": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2407.04174"
+      },
+      {
+        "label": "PDF",
+        "href": "/pdfs/gemini_Li.pdf"
+      }
+    ],
+    "bib": "@misc{li2024geminiintegratingfullfledgedsensing,\n  title={Gemini: Integrating Full-fledged Sensing upon Millimeter Wave Communications}, \n  author={Yilong Li and Zhe Chen and Jun Luo and Suman Banerjee},\n  year={2024},\n  eprint={2407.04174},\n  archivePrefix={arXiv},\n  primaryClass={cs.NI},\n  url={https://arxiv.org/abs/2407.04174}, \n}"
+  },
+  {
+    "id": "2020-12-10-spectrumsensor",
+    "title": "Enabling Wideband, Mobile Spectrum Sensing through Onboard Heterogeneous Computing",
+    "date": "2021-01-31",
+    "year": 2021,
+    "venue": "HotMobile 2021",
+    "area": "Wireless Sensing",
+    "authors": "<strong>Yilong Li</strong>, Yijing Zeng, Suman Banerjee",
+    "note": "",
+    "abstract": "We explore the design of a platform to support truly mobile and untethered, wideband spectrum sensing. First, the design of the platform needs to be physically small and lightweight. Next, we observe that wideband spectrum sensing (say > 20 MHz at a time) can easily generate a large volume of PSD/IQ data, in uncompressed form (> 1 Gbps). Due to challenges of efficient offload of this large data volume, we design a heterogeneous computing platform — using a combination of FPGA and CPU — built right on the spectrum sensor board, onto which various sophisticated compression algorithms, or wireless signal processing functions (even deep learning based ones) can be implemented. The FPGA is chosen to meet the real-time processing requirements of modern high-speed wireless protocols, opening new opportunities. Finally, we provide easy connectivity to common mobile devices (currently Android phone) and a starting mobile app to enable easy programmability and control functions. Overall, our highly-integrated platform has the capability of sensing a wide frequency range of wireless signals with a high sampling rate and being controlled by a mobile phone via a USB OTG cable. We build a prototype of our system and show through experiments that our device can support a bandwidth up to 56 MHz and a wide frequency range from 70 MHz to 6 GHz for spectrum sensing, and run a deep learning model inference onboard for signal classification. We conclude by discussing the future challenges to realize large-scale spectrum sensing using our platform.",
+    "resources": [
+      {
+        "label": "PDF",
+        "href": "/pdfs/spectrum_hotmobile21.pdf"
+      },
+      {
+        "label": "Publisher",
+        "href": "https://dl.acm.org/doi/10.1145/3446382.3448651"
+      }
+    ],
+    "bib": "@inproceedings{10.1145/3446382.3448651,\n  author = {Yilong Li and Yijing Zeng and Suman Banerjee},\n  title = {Enabling Wideband, Mobile Spectrum Sensing through Onboard Heterogeneous Computing},\n  year = {2021},\n  isbn = {9781450383233},\n  publisher = {Association for Computing Machinery},\n  address = {New York, NY, USA},\n  url = {https://doi.org/10.1145/3446382.3448651},\n  doi = {10.1145/3446382.3448651},\n  booktitle = {Proceedings of the 22nd International Workshop on Mobile Computing Systems and Applications},\n  pages = {85–91},\n  numpages = {7},\n  keywords = {Mobile spectrum sensing, Heterogeneous computing},\n  location = {Virtual, United Kingdom},\n  series = {HotMobile '21}\n}"
+  },
+  {
+    "id": "2018-09-01-livetag-getmobile",
+    "title": "LiveTag: Sensing Human-Object Interaction Through Passive Chipless WiFi Tags",
+    "date": "2018-09-01",
+    "year": 2018,
+    "venue": "GetMobile 2018",
+    "area": "Wireless Sensing",
+    "authors": "Chuhan Gao* and <strong>Yilong Li*</strong>, Xinyu Zhang",
+    "note": "",
+    "abstract": "An article introducing LiveTag, a passive chipless WiFi tagging system for sensing human-object interaction.",
+    "resources": [],
+    "bib": ""
+  },
+  {
+    "id": "2018-02-28-Livetag",
+    "title": "LiveTag: Sensing Human-Object Interaction through Passive Chipless WiFi Tags",
+    "date": "2018-02-28",
+    "year": 2018,
+    "venue": "NSDI 2018",
+    "area": "Wireless Sensing",
+    "authors": "Chuhan Gao* and <strong>Yilong Li*</strong>, Xinyu Zhang",
+    "note": "",
+    "abstract": "Many types of human activities involve interaction with passive objects. Thus,  by wirelessly sensing human interaction with them, one can infer activities at a  fine resolution, enabling a new wave of ubiquitous computing applications. In  this paper, we propose LiveTag to achieve this vision. LiveTag is a fully passive,  thin metal tag that can be printed on paper-like substrates and attached to objects.  It has no batteries, silicon chips, or discrete electronic components. But when  touched by fingers, it disturbs the ambient WiFi channel in a deterministic way.  Multiple metallic structures can be printed on the same tag to create unique touch  points. Further, LiveTag incorporates customized multi-antenna beamforming  algorithms that allow WiFi receivers to sense the tag and discriminate the touch  events amid multipath reflections/interferences. Our prototypes of LiveTag have  verified its feasibility and performance. We have further applied LiveTag to  real-world usage scenarios to showcase its effectiveness in sensing human-object  interaction.",
+    "resources": [
+      {
+        "label": "PDF",
+        "href": "/pdfs/Livetag.pdf"
+      },
+      {
+        "label": "Publisher",
+        "href": "https://dl.acm.org/doi/abs/10.5555/3307441.3307487"
+      }
+    ],
+    "bib": "@inproceedings{livetag_NSDI2018,\n  author = {Chuhan Gao and Yilong Li and Xinyu Zhang},\n  title = {Livetag: sensing human-object interaction through passive chipless WiFi tags},\n  year = {2018},\n  isbn = {9781931971430},\n  publisher = {USENIX Association},\n  address = {USA},\n  booktitle = {Proceedings of the 15th USENIX Conference on Networked Systems Design and Implementation (NSDI 2018)},\n  pages = {533–546},\n  numpages = {14},\n  location = {Renton, WA, USA},\n  series = {NSDI'18}\n}"
+  }
+]

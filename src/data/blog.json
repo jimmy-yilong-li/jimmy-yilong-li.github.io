@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "what-we-learned-the-hard-way-about-npus-gpus-and-unified-memory",
+    "title": "What We Learned the Hard Way About NPUs, GPUs, and Unified Memory",
+    "summary": "NPUs like stable graphs, GPUs need enough parallel work, and shared memory is still shared.",
+    "date": "2026-07-11",
+    "minutes": 6,
+    "cover": "/images/compute-memory.svg"
+  }
+]

@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResourceLinks from '../../components/ResourceLinks.astro';
+import Icon from '../../components/Icon.astro';
+import papers from '../../data/publications.json';
+import { paperHref } from '../../lib/content.mjs';
+export function getStaticPaths() {
+  return papers.map(paper => ({ params: { slug: paper.id }, props: { paper } }));
+}
+const { paper } = Astro.props;
+const workHref = paperHref(paper);
+---
+<BaseLayout title={`${paper.title} | Yilong Li`} description={paper.abstract.slice(0, 180) || paper.title}>
+  <div class="shell paper-page">
+    <header class="work-header"><a class="back-link" href="/publications/"><Icon name="back" size={16} />Publications</a><p class="eyebrow">{paper.area} / {paper.venue}</p><h1 class="paper-page-title">{paper.title}</h1><p class="work-authors" set:html={paper.authors} />{paper.note && <p class="contribution-note">{paper.note}</p>}<ResourceLinks resources={paper.resources} /></header>
+    {workHref.startsWith('/work/') && <a class="paper-project-callout" href={workHref}><span>Explore the system, figures, and research context</span><Icon name="arrow" /></a>}
+    <article class="prose paper-abstract">{paper.abstract && <><h2>Abstract</h2>{paper.abstract.split(/\n\s*\n|\n/).filter(Boolean).map(paragraph => <p>{paragraph}</p>)}</>}{!paper.abstract && <p>{paper.resources.length > 0 ? 'The available paper resources are linked above.' : <>More publication information is available on <a href="https://scholar.google.com/citations?user=G6P9aMQAAAAJ&hl=en">Google Scholar</a>.</>}</p>}{paper.bib && <details class="abstract-details"><summary>BibTeX</summary><pre><code>{paper.bib}</code></pre></details>}</article>
+  </div>
+</BaseLayout>

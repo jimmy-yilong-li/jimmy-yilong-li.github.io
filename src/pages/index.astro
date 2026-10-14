@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkCard from '../components/WorkCard.astro';
+import Icon from '../components/Icon.astro';
+import { works } from '../data/works';
+import news from '../data/news.json';
+import { formatDate } from '../lib/content.mjs';
+---
+<BaseLayout>
+  <div class="shell">
+    <section id="about" class="about-section">
+      <div class="identity reveal">
+        <div class="identity-copy">
+          <p class="eyebrow"><span class="signal-dot"></span>Systems Research / On-Device &amp; Edge AI</p>
+          <h1>Yilong Li<span class="title-dot">.</span></h1>
+          <p class="identity-subtitle">Building intelligence that runs <em>locally.</em></p>
+        </div>
+        <div class="identity-image">
+          <img src="/images/optimized/profile-hardware.webp" alt="Custom UWB radar hardware designed by Yilong Li" width="1907" height="1812" />
+          <span>Built from the ground up</span>
+        </div>
+      </div>
+      <div class="bio-grid reveal" style="--delay:80ms">
+        <div class="bio-primary">
+          <p>I am a systems researcher building <strong>hardware, software, and models</strong> for on-device and edge AI. I focus on running <strong>LLMs and VLMs locally</strong> on mobile and wearable devices. My work spans efficient inference, RL post-training, and wireless sensing.</p>
+          <p>I obtained my Ph.D. from the University of Wisconsin-Madison, advised by <a href="https://pages.cs.wisc.edu/~suman/">Prof. Suman Banerjee</a>.</p>
+        </div>
+        <div class="bio-experience">
+          <p>Over the past several years, I have built and deployed MIMO radar systems in indoor and hospital environments, worked with Dr. Eugene Chai and Dr. Karthikeyan Sundaresan at NEC Laboratories America, and explored silicon and ML acceleration for wearables at Meta Reality Labs. These experiences taught me that practical AI cannot be designed one layer at a time: sensing hardware, accelerators, runtimes, models, and deployment constraints must be considered together.</p>
+          <p>This perspective now guides Re-Mind, my work on privacy-preserving, on-device memory for personal assistants. <a href="/pdfs/Re-Mind_for_pitch.pdf">Re-Mind slides <Icon name="diagonal" size={12} /></a></p>
+        </div>
+      </div>
+      <div class="about-bottom reveal" style="--delay:140ms">
+        <div class="profile-links">
+          <a href="mailto:yli758@wisc.edu"><Icon name="mail" size={16} />Email</a>
+          <a href="https://scholar.google.com/citations?user=G6P9aMQAAAAJ&hl=en"><Icon name="book" size={16} />Google Scholar</a>
+          <a href="https://github.com/jimmy-yilong-li"><Icon name="code" size={16} />GitHub</a>
+          <a href="https://www.linkedin.com/in/yilong-li-80a76862/">LinkedIn <Icon name="diagonal" size={14} /></a>
+        </div>
+        <blockquote class="manifesto">AI must not be locked inside corporate black boxes. Free intelligence that people themselves can run, study, modify, reproduce, share, and trust.</blockquote>
+      </div>
+    </section>
+
+    <section id="news" class="news-section" aria-labelledby="news-heading">
+      <div class="news-label"><span class="section-number">01 /</span><h2 id="news-heading">News</h2></div>
+      <div class="news-rows">
+        {news.map(item => <div class="news-row"><time datetime={item.date}>{formatDate(item.date)}</time><a href={item.href}>{item.title}<Icon name="diagonal" size={13} /></a></div>)}
+      </div>
+    </section>
+
+    <section id="selected-work" class="research-section" aria-labelledby="work-heading">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span class="section-number">02 /</span>Research in practice</p><h2 id="work-heading">Selected work<span class="title-dot">.</span></h2></div>
+        <p>From local multimodal inference<br />to agents and sensing systems.</p>
+      </div>
+      <div class="work-toolbar">
+        <div class="work-filters" role="group" aria-label="Filter selected work">
+          <button data-filter="all" aria-pressed="true">All work <span>06</span></button>
+          <button data-filter="on-device" aria-pressed="false">On-device AI</button>
+          <button data-filter="models" aria-pressed="false">Efficient models</button>
+          <button data-filter="wireless" aria-pressed="false">Wireless sensing</button>
+        </div>
+        <a class="quiet-link" href="/publications/">Publication list <Icon name="arrow" size={16} /></a>
+      </div>
+      <p class="sr-only" role="status" data-filter-status>Showing all 6 selected works.</p>
+      <div class="work-grid">{works.map((work, index) => <WorkCard work={work} index={index} />)}</div>
+    </section>
+  </div>
+</BaseLayout>
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('.work-card[data-group]');
+  const status = document.querySelector<HTMLElement>('[data-filter-status]');
+  buttons.forEach(button => button.addEventListener('click', () => {
+    const filter = button.dataset.filter;
+    let count = 0;
+    buttons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+    cards.forEach(card => {
+      card.hidden = filter !== 'all' && card.dataset.group !== filter;
+      if (!card.hidden) count++;
+    });
+    if (status) status.textContent = `Showing ${count} selected ${count === 1 ? 'work' : 'works'}.`;
+  }));
+</script>

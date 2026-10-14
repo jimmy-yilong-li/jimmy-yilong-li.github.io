@@ -1,0 +1,11 @@
+{
+  "2024-10-1-tinyllm": {
+    "authors": "<strong>Yilong Li</strong>, Shuai Zhang, Yijing Zeng, Chengpo Yan, Hao Zhang, Xinmiao Xiong, Jingyu Liu, Pan Hu, Suman Banerjee",
+    "abstract": "Large Multimodal Models (LMMs) are inherently modular, comprising vision and audio encoders, a projector, and a language backbone. Yet existing systems execute them monolithically, underutilizing the heterogeneous accelerators (NPUs, GPUs, DSPs) on modern SoCs and inflating end-to-end latency. We present NANOMIND, a hardware-software co-design inference framework that decomposes each LMM into modular bricks - vision, projector, language, and audio - and maps each brick to its best-suited compute units. A Token-Aware Buffer Manager (TABM) enables zero-copy embedding transfer across accelerators on unified-memory SoCs, bypassing CPU bottlenecks. Combined with customized hardware, a battery-aware scheduler, and fused low-bit GEMM kernels, NANOMIND runs entirely on a compact, battery-powered prototype that operates fully offline. NANOMIND reduces end-to-end energy by 42.3% against mainstream edge frameworks and devkits; in its on-demand low-power mode, the prototype runs LLaVA-OneVision-Qwen2-0.5B with a camera for nearly 18.8 hours on a single 2,000 mAh battery.",
+    "resources": [
+      { "label": "PDF", "href": "/pdfs/nanomind-iclr2026.pdf" },
+      { "label": "ICLR", "href": "https://proceedings.iclr.cc/paper_files/paper/2026/hash/b20260e3e1bd7ea108831925d65ce0a6-Abstract-Conference.html" }
+    ],
+    "metadataSource": "https://proceedings.iclr.cc/paper_files/paper/2026/file/b20260e3e1bd7ea108831925d65ce0a6-Paper-Conference.pdf"
+  }
+}

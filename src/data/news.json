@@ -1,0 +1,27 @@
+[
+  {
+    "title": "CPPO was accepted to EMNLP 2026",
+    "date": "2026-08-20",
+    "href": "https://arxiv.org/abs/2605.27000"
+  },
+  {
+    "title": "MEDUSA repo is here!",
+    "date": "2026-05-21",
+    "href": "https://github.com/JimmyLi-Network/Medusa_UWB_MIMO"
+  },
+  {
+    "title": "NanoMind was accepted to ICLR 2026",
+    "date": "2026-01-25",
+    "href": "/work/nanomind/"
+  },
+  {
+    "title": "Distributed MIMO Radars was accepted to MobiCom 2025",
+    "date": "2025-06-01",
+    "href": "/work/medusa/"
+  },
+  {
+    "title": "PalmBench was accepted to ICLR 2025",
+    "date": "2025-01-22",
+    "href": "/work/palmbench/"
+  }
+]

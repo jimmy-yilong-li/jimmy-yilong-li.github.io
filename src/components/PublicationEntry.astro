@@ -1,0 +1,16 @@
+---
+import ResourceLinks from './ResourceLinks.astro';
+import Icon from './Icon.astro';
+import { paperHref } from '../lib/content.mjs';
+interface Props { paper: any; }
+const { paper } = Astro.props;
+---
+<article class="publication-entry">
+  <span class="publication-year">{paper.year}</span>
+  <div>
+    <h3><a href={paperHref(paper)}>{paper.title}</a></h3>
+    <p class="publication-authors" set:html={paper.authors} />
+    <p class="publication-venue"><strong>{paper.venue}</strong>{paper.note && paper.note !== 'arXiv' && <span>{paper.note}</span>}{paper.id === '2018-02-28-Livetag' && <span>* Equal contribution</span>}</p>
+    <div class="publication-actions"><ResourceLinks resources={paper.resources} compact /><a href={paperHref(paper)} class="paper-detail-link">Details <Icon name="diagonal" size={12} /></a></div>
+  </div>
+</article>

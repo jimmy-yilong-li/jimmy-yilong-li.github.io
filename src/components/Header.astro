@@ -1,0 +1,52 @@
+---
+import Icon from './Icon.astro';
+const path = Astro.url.pathname;
+const links = [
+  { label: 'About', href: '/#about', active: path === '/' },
+  { label: 'Publications', href: '/publications/', active: path.startsWith('/publications') || path.startsWith('/papers') },
+  { label: 'Projects', href: '/projects/', active: path.startsWith('/projects') || path.startsWith('/work') },
+  { label: 'Blog', href: '/blog/', active: path.startsWith('/blog') },
+];
+---
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="wordmark" href="/" aria-label="Yilong Li home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span>Yilong Li<span class="wordmark-dot">.</span></span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      {links.map(link => <a href={link.href} aria-current={link.active ? 'page' : undefined}>{link.label}</a>)}
+    </nav>
+    <a class="header-contact" href="mailto:yli758@wisc.edu" aria-label="Email Yilong Li"><Icon name="mail" size={18} /><span>Get in touch</span></a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-navigation" aria-label="Open navigation"><Icon name="menu" /></button>
+  </div>
+  <nav id="mobile-navigation" class="mobile-nav" aria-label="Mobile navigation" hidden>
+    {links.map(link => <a href={link.href} aria-current={link.active ? 'page' : undefined}>{link.label}</a>)}
+    <a href="mailto:yli758@wisc.edu">Email</a>
+  </nav>
+</header>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const navigation = document.querySelector<HTMLElement>('#mobile-navigation');
+  function closeNavigation() {
+    if (!button || !navigation) return;
+    navigation.hidden = true;
+    button.setAttribute('aria-expanded', 'false');
+    button.setAttribute('aria-label', 'Open navigation');
+  }
+  button?.addEventListener('click', () => {
+    if (!navigation) return;
+    const open = button.getAttribute('aria-expanded') !== 'true';
+    navigation.hidden = !open;
+    button.setAttribute('aria-expanded', String(open));
+    button.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  });
+  navigation?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNavigation));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && button?.getAttribute('aria-expanded') === 'true') {
+      closeNavigation();
+      button.focus();
+    }
+  });
+  matchMedia('(min-width: 720px)').addEventListener('change', closeNavigation);
+</script>

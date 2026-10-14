@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+import type { ResearchWork } from '../data/types';
+import { displayImage } from '../lib/content.mjs';
+interface Props { work: ResearchWork; index?: number; }
+const { work, index = 0 } = Astro.props;
+const group = work.category.startsWith('On-Device') ? 'on-device'
+  : work.category === 'Wireless Sensing' ? 'wireless' : 'models';
+---
+<article class="work-card reveal" data-group={group} style={`--delay:${Math.min(index, 5) * 70}ms`}>
+  <a class="work-card-link" href={`/work/${work.slug}/`} aria-label={`Explore ${work.name}: ${work.title}`}>
+    <div class:list={['work-cover', `work-cover--${work.slug}`]}>
+      <img src={displayImage(work.cover)} alt={work.coverAlt} width="900" height="560" loading="lazy" decoding="async" style={`object-fit:${work.coverFit ?? 'cover'};object-position:${work.coverPosition ?? 'center'}`} />
+      <span class="cover-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+      <span class="cover-arrow"><Icon name="diagonal" size={20} /></span>
+    </div>
+    <div class="work-card-body">
+      <div class="card-meta"><span>{work.category}</span><span class="venue-tag">{work.venue}</span></div>
+      <h3>{work.name}<Icon name="diagonal" size={18} /></h3>
+      <p class="card-title">{work.title}</p>
+      <p class="card-summary">{work.summary}</p>
+      <span class="card-bottom">{work.kind === 'Project' ? 'Explore the system' : 'Read the research'} <Icon name="arrow" size={16} /></span>
+    </div>
+  </a>
+</article>
