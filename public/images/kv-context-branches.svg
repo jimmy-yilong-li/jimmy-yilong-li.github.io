@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-labelledby="kv-branches-title kv-branches-desc">
+  <title id="kv-branches-title">One video history, private question branches</title>
+  <desc id="kv-branches-desc">Completed causal video history forms an immutable prefix. Question A branches from that completed prefix into a private suffix and Answer A. Continued new frames extend only the shared video history, yielding a later completed prefix from which Question B branches into a private suffix and Answer B. The earlier prefix remains unchanged. The dashed pending next frame is not ready and is excluded from both ready branch views. Independently computed answer tails never merge into shared history or each other, and earlier answers never observe new frames. Segments are schematic, not frame counts or durations.</desc>
+  <defs>
+    <marker id="kv-branches-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 8 4 L 0 8 Z" fill="#39766a"/>
+    </marker>
+  </defs>
+  <rect width="900" height="560" fill="#f7f8f4"/>
+  <g aria-hidden="true" fill="none" stroke="#39766a" stroke-width="2.5" stroke-linejoin="round" marker-end="url(#kv-branches-arrow)">
+    <path d="M 402 196 H 530"/>
+    <path d="M 220 250 V 330"/>
+    <path d="M 402 398 H 530"/>
+  </g>
+  <g aria-hidden="true">
+    <rect x="48" y="142" width="354" height="108" rx="16" fill="#39766a"/>
+    <rect x="72" y="160" width="72" height="12" rx="3" fill="#dce5d8"/>
+    <rect x="152" y="160" width="72" height="12" rx="3" fill="#dce5d8"/>
+    <rect x="232" y="160" width="72" height="12" rx="3" fill="#dce5d8"/>
+    <rect x="532" y="136" width="320" height="132" rx="16" fill="#dce5d8"/>
+    <path d="M 556 191 H 828" stroke="#39766a" stroke-width="1.5"/>
+    <path d="M 700 212 H 720" fill="none" stroke="#39766a" stroke-width="2" marker-end="url(#kv-branches-arrow)"/>
+    <rect x="204" y="282" width="32" height="22" rx="4" fill="#e4a26a" stroke="#142d2a" stroke-width="1.5"/>
+    <rect x="48" y="344" width="354" height="108" rx="16" fill="#39766a"/>
+    <rect x="72" y="362" width="72" height="12" rx="3" fill="#dce5d8"/>
+    <rect x="152" y="362" width="72" height="12" rx="3" fill="#dce5d8"/>
+    <rect x="232" y="362" width="72" height="12" rx="3" fill="#dce5d8"/>
+    <rect x="312" y="362" width="66" height="12" rx="3" fill="#e4a26a"/>
+    <rect x="532" y="338" width="320" height="132" rx="16" fill="#dce5d8"/>
+    <path d="M 556 393 H 828" stroke="#39766a" stroke-width="1.5"/>
+    <path d="M 700 414 H 720" fill="none" stroke="#39766a" stroke-width="2" marker-end="url(#kv-branches-arrow)"/>
+    <path d="M 220 452 V 488" fill="none" stroke="#142d2a" stroke-width="1.5" stroke-dasharray="5 6"/>
+    <rect x="48" y="488" width="354" height="42" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5" stroke-dasharray="6 6"/>
+  </g>
+  <g font-family="sans-serif" fill="#142d2a">
+    <text x="48" y="56" font-size="36" font-weight="600" letter-spacing="-0.7">One history. Private branches.</text>
+    <text x="48" y="92" font-size="22">Completed prefixes stay immutable as video continues.</text>
+    <text x="72" y="204" font-size="26" font-weight="600" fill="#f7f8f4">Completed prefix</text>
+    <text x="72" y="232" font-size="22" fill="#f7f8f4">Immutable video history</text>
+    <text x="556" y="172" font-size="26" font-weight="600">Question A</text>
+    <text x="556" y="220" font-size="22">Private suffix</text>
+    <text x="734" y="220" font-size="22">Answer A</text>
+    <text x="556" y="250" font-size="22">Earlier history only</text>
+    <text x="250" y="301" font-size="22">New frames</text>
+    <text x="72" y="406" font-size="26" font-weight="600" fill="#f7f8f4">Later completed prefix</text>
+    <text x="72" y="434" font-size="22" fill="#f7f8f4">Same history + new frames</text>
+    <text x="556" y="374" font-size="26" font-weight="600">Question B</text>
+    <text x="556" y="422" font-size="22">Private suffix</text>
+    <text x="734" y="422" font-size="22">Answer B</text>
+    <text x="556" y="452" font-size="22">Includes new frames</text>
+    <text x="72" y="517" font-size="22">Next frame pending</text>
+    <text x="434" y="517" font-size="22">Not ready; excluded from both views.</text>
+    <text x="48" y="554" font-size="22">Answer tails stay private; earlier answers never see new frames.</text>
+  </g>
+</svg>

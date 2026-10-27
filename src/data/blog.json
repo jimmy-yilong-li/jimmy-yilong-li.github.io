@@ -1,10 +1,23 @@
 [
   {
+    "slug": "kv-caching-across-accelerators-on-edge-socs",
+    "title": "KV Caching Across Accelerators on Edge SoCs",
+    "summary": "What a KV cache saves, when another engine can use it, and when rebuilding the context is the better option.",
+    "date": "2026-10-21",
+    "minutes": 12,
+    "cover": "/images/kv-context-branches.svg",
+    "coverMobile": "/images/kv-context-branches-mobile.svg",
+    "coverAlt": "A growing video history branches into independent answers, each bound to its own completed prefix; pending frames remain outside those views.",
+    "coverCaption": "New frames extend the history. Each answer keeps the completed prefix it started with."
+  },
+  {
     "slug": "what-we-learned-the-hard-way-about-npus-gpus-and-unified-memory",
     "title": "What We Learned the Hard Way About NPUs, GPUs, and Unified Memory",
     "summary": "NPUs like stable graphs, GPUs need enough parallel work, and shared memory is still shared.",
     "date": "2026-07-11",
     "minutes": 6,
-    "cover": "/images/compute-memory.svg"
+    "cover": "/images/compute-memory.svg",
+    "coverAlt": "CPU, GPU, and NPU connected to one shared memory pool",
+    "coverCaption": "Different execution models. One shared memory system."
   }
 ]

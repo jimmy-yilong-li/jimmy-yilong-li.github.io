@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="720" viewBox="0 0 480 720" role="img" aria-labelledby="kv-paths-mobile-title kv-paths-mobile-desc">
+  <title id="kv-paths-mobile-title">Three ways to continue from resident GPU state</title>
+  <desc id="kv-paths-mobile-desc">Three stacked options start with resident GPU state and consider a CPU destination. Read each route top to bottom. Wait on the resident GPU, then run query suffix prefill and decode on GPU. Alternatively, export, convert, sync, and import compatible KV to the CPU destination, then run query suffix prefill and decode on CPU. Or replay retained visual embeddings through historical LM prefill on CPU, then run query suffix prefill and decode on CPU. Import requires backend support; a shared memory pool does not guarantee compatible KV layouts or import APIs. Schematic only: no scale, duration, numbers, or guaranteed winner.</desc>
+  <defs>
+    <marker id="kv-paths-mobile-arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 6 3 L 0 6 Z" fill="#39766a"/>
+    </marker>
+  </defs>
+  <rect width="480" height="720" fill="#f7f8f4"/>
+  <g aria-hidden="true" stroke="#dce5d8" stroke-width="1.5" fill="none">
+    <rect x="24" y="106" width="432" height="146" rx="16"/>
+    <rect x="24" y="270" width="432" height="216" rx="16"/>
+    <rect x="24" y="504" width="432" height="146" rx="16"/>
+  </g>
+  <g aria-hidden="true">
+    <rect x="40" y="158" width="150" height="36" rx="7" fill="#39766a"/>
+    <rect x="40" y="320" width="104" height="36" rx="7" fill="#39766a"/>
+    <rect x="184" y="320" width="238" height="36" rx="7" fill="#e4a26a"/>
+    <rect x="40" y="368" width="178" height="36" rx="7" fill="#e4a26a"/>
+    <rect x="268" y="368" width="154" height="36" rx="7" fill="#dce5d8"/>
+    <rect x="40" y="554" width="150" height="36" rx="7" fill="#dce5d8"/>
+  </g>
+  <g font-family="sans-serif" fill="#142d2a">
+    <text x="24" y="50" font-size="32" font-weight="600" letter-spacing="-0.5">Wait, import, or replay.</text>
+    <text x="24" y="84" font-size="22">GPU state; CPU continuation options.</text>
+
+    <text x="48" y="142" font-size="26" font-weight="600">Wait / stay on GPU</text>
+    <text x="48" y="184" font-size="22" fill="#f7f8f4">Resident KV</text>
+    <text x="236" y="184" font-size="22">Wait on GPU</text>
+    <text x="48" y="226" font-size="22">Query suffix prefill</text>
+    <text x="306" y="226" font-size="22">Decode GPU</text>
+
+    <text x="48" y="306" font-size="26" font-weight="600">Import / GPU to CPU</text>
+    <text x="48" y="346" font-size="22" fill="#f7f8f4">GPU KV</text>
+    <text x="192" y="346" font-size="22">Export / convert</text>
+    <text x="48" y="394" font-size="22">Sync / import</text>
+    <text x="276" y="394" font-size="22">CPU KV</text>
+    <text x="48" y="442" font-size="22">Query suffix prefill</text>
+    <text x="306" y="442" font-size="22">Decode CPU</text>
+    <text x="48" y="474" font-size="22">Import requires backend support</text>
+
+    <text x="48" y="540" font-size="26" font-weight="600">Replay / rebuild on CPU</text>
+    <text x="48" y="580" font-size="22">Embeddings</text>
+    <text x="236" y="580" font-size="22">History prefill</text>
+    <text x="48" y="624" font-size="22">Query suffix prefill</text>
+    <text x="306" y="624" font-size="22">Decode CPU</text>
+
+    <text x="24" y="680" font-size="22">Schematic only: no scale or duration.</text>
+    <text x="24" y="710" font-size="22">No guaranteed winner.</text>
+  </g>
+  <g aria-hidden="true" fill="none" stroke="#39766a" stroke-width="2" marker-end="url(#kv-paths-mobile-arrow)">
+    <path d="M 198 176 H 224"/><path d="M 266 218 H 292"/>
+    <path d="M 152 338 H 176"/><path d="M 228 386 H 256"/><path d="M 266 434 H 292"/>
+    <path d="M 198 572 H 224"/><path d="M 266 616 H 292"/>
+  </g>
+  <g aria-hidden="true" fill="none" stroke="#39766a" stroke-width="1.5" marker-end="url(#kv-paths-mobile-arrow)">
+    <path d="M 414 176 H 438 V 200 H 144 V 206"/>
+    <path d="M 424 338 H 438 V 362 H 124 V 366"/>
+    <path d="M 424 386 H 438 V 414 H 144 V 420"/>
+    <path d="M 414 572 H 438 V 598 H 144 V 604"/>
+  </g>
+</svg>

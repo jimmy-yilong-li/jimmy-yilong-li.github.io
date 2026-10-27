@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-labelledby="kv-paths-title kv-paths-desc">
+  <title id="kv-paths-title">Wait, import, or replay before answering</title>
+  <desc id="kv-paths-desc">Three options start with resident GPU state and consider a CPU destination. Wait on the resident GPU, then run query suffix prefill and decode on GPU. Alternatively, export, convert, sync, and import compatible KV to the CPU destination, then run query suffix prefill and decode on CPU. Or replay retained visual embeddings through historical LM prefill on CPU, then run query suffix prefill and decode on CPU. Import requires backend support; a shared memory pool does not guarantee compatible KV layouts or import APIs. Schematic only: no scale, duration, numbers, or guaranteed winner.</desc>
+  <defs>
+    <marker id="kv-paths-arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 6 3 L 0 6 Z" fill="#39766a"/>
+    </marker>
+  </defs>
+  <rect width="900" height="560" fill="#f7f8f4"/>
+  <g font-family="sans-serif" fill="#142d2a">
+    <text x="30" y="52" font-size="36" font-weight="600" letter-spacing="-0.7">Wait, import, or replay.</text>
+    <text x="30" y="86" font-size="22">Keep compute on the resident GPU, or prepare a CPU continuation.</text>
+
+    <text x="30" y="118" font-size="26" font-weight="600">Wait / keep compute on GPU</text>
+    <g aria-hidden="true">
+      <rect x="30" y="132" width="166" height="76" rx="10" fill="#39766a"/>
+      <rect x="220" y="132" width="258" height="76" rx="10" fill="#dce5d8"/>
+      <rect x="502" y="132" width="216" height="76" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+      <rect x="742" y="132" width="128" height="76" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="113" y="163" font-size="22" fill="#f7f8f4">Resident GPU</text>
+      <text x="113" y="192" font-size="22" fill="#f7f8f4">KV</text>
+      <text x="349" y="179" font-size="24">Wait on GPU</text>
+      <text x="610" y="163" font-size="22">Query suffix</text>
+      <text x="610" y="192" font-size="22">prefill / GPU</text>
+      <text x="806" y="163" font-size="24">Decode</text>
+      <text x="806" y="192" font-size="22">GPU</text>
+    </g>
+
+    <text x="30" y="248" font-size="26" font-weight="600">Import / move compatible state to CPU</text>
+    <g aria-hidden="true">
+      <rect x="30" y="262" width="166" height="92" rx="10" fill="#39766a"/>
+      <rect x="220" y="262" width="258" height="92" rx="10" fill="#e4a26a"/>
+      <rect x="502" y="262" width="216" height="92" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+      <rect x="742" y="262" width="128" height="92" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="113" y="317" font-size="24" fill="#f7f8f4">GPU KV</text>
+      <text x="349" y="287" font-size="22">Export / convert</text>
+      <text x="349" y="314" font-size="22">Sync / import</text>
+      <text x="349" y="341" font-size="22">Compatible KV</text>
+      <text x="610" y="301" font-size="22">Query suffix</text>
+      <text x="610" y="330" font-size="22">prefill / CPU</text>
+      <text x="806" y="301" font-size="24">Decode</text>
+      <text x="806" y="330" font-size="22">CPU</text>
+    </g>
+    <text x="220" y="384" font-size="22">Import requires backend support</text>
+
+    <text x="30" y="422" font-size="26" font-weight="600">Replay / rebuild state on CPU</text>
+    <g aria-hidden="true">
+      <rect x="30" y="436" width="166" height="76" rx="10" fill="#dce5d8"/>
+      <rect x="220" y="436" width="258" height="76" rx="10" fill="#dce5d8"/>
+      <rect x="502" y="436" width="216" height="76" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+      <rect x="742" y="436" width="128" height="76" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="113" y="467" font-size="22">Retained visual</text>
+      <text x="113" y="496" font-size="22">embeddings</text>
+      <text x="349" y="467" font-size="24">History LM prefill</text>
+      <text x="349" y="496" font-size="22">CPU</text>
+      <text x="610" y="467" font-size="22">Query suffix</text>
+      <text x="610" y="496" font-size="22">prefill / CPU</text>
+      <text x="806" y="467" font-size="24">Decode</text>
+      <text x="806" y="496" font-size="22">CPU</text>
+    </g>
+    <text x="450" y="549" text-anchor="middle" font-size="22">Schematic only: no scale, duration, or guaranteed winner.</text>
+  </g>
+  <g aria-hidden="true" fill="none" stroke="#39766a" stroke-width="2" marker-end="url(#kv-paths-arrow)">
+    <path d="M 198 170 H 216"/><path d="M 480 170 H 498"/><path d="M 720 170 H 738"/>
+    <path d="M 198 308 H 216"/><path d="M 480 308 H 498"/><path d="M 720 308 H 738"/>
+    <path d="M 198 474 H 216"/><path d="M 480 474 H 498"/><path d="M 720 474 H 738"/>
+  </g>
+</svg>

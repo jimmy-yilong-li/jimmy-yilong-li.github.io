@@ -5,6 +5,9 @@ summary: "NPUs like stable graphs, GPUs need enough parallel work, and shared me
 date: 2026-07-11
 minutes: 6
 cover: /images/compute-memory.svg
+coverAlt: "CPU, GPU, and NPU connected to one shared memory pool"
+coverCaption: "Different execution models. One shared memory system."
+relatedSlug: kv-caching-across-accelerators-on-edge-socs
 ---
 > A quick note on the numbers: they are rounded from what we observed in our experiments. The trend matters more than the exact value.
 

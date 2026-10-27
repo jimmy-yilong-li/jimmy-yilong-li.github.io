@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-labelledby="kv-reuse-title kv-reuse-desc">
+  <title id="kv-reuse-title">Reuse starts at two different layers</title>
+  <desc id="kv-reuse-desc">Three schematic routes run from image through vision and projection to visual embeddings, historical LM prefill, prefix KV, query suffix prefill, and decode. An embeddings hit skips visual work but still needs historical LM prefill to produce contextual prefix KV. A prefix KV hit also skips historical LM prefill. Neither hit skips query suffix prefill or decode. Visual embeddings are not contextual KV. The aligned lanes show stage order, not scale or duration.</desc>
+  <defs>
+    <marker id="kv-reuse-arrow" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 6 3 L 0 6 Z" fill="#39766a"/>
+    </marker>
+  </defs>
+  <rect width="900" height="560" fill="#f7f8f4"/>
+  <g font-family="sans-serif" fill="#142d2a">
+    <text x="30" y="56" font-size="36" font-weight="600" letter-spacing="-0.7">Reuse the right layer.</text>
+    <text x="30" y="92" font-size="22">Embeddings save visual work. Prefix KV saves history prefill too.</text>
+
+    <text x="30" y="134" font-size="26" font-weight="600">No cache</text>
+    <g aria-hidden="true" stroke="#142d2a" stroke-width="1.5">
+      <rect x="30" y="150" width="70" height="72" rx="10" fill="#f7f8f4"/>
+      <rect x="112" y="150" width="128" height="72" rx="10" fill="#e4a26a"/>
+      <rect x="252" y="150" width="132" height="72" rx="10" fill="#dce5d8"/>
+      <rect x="396" y="150" width="132" height="72" rx="10" fill="#f7f8f4"/>
+      <rect x="540" y="150" width="84" height="72" rx="10" fill="#dce5d8"/>
+      <rect x="636" y="150" width="126" height="72" rx="10" fill="#f7f8f4"/>
+      <rect x="774" y="150" width="96" height="72" rx="10" fill="#f7f8f4"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="65" y="194" font-size="22">Image</text>
+      <text x="176" y="179" font-size="22">Vision +</text>
+      <text x="176" y="206" font-size="22">projection</text>
+      <text x="318" y="179" font-size="22">Visual</text>
+      <text x="318" y="206" font-size="22">embeddings</text>
+      <text x="462" y="179" font-size="22">History</text>
+      <text x="462" y="206" font-size="22">LM prefill</text>
+      <text x="582" y="179" font-size="22">Prefix</text>
+      <text x="582" y="206" font-size="22">KV</text>
+      <text x="699" y="179" font-size="22">Query suffix</text>
+      <text x="699" y="206" font-size="22">prefill</text>
+      <text x="822" y="194" font-size="22">Decode</text>
+    </g>
+
+    <text x="30" y="276" font-size="26" font-weight="600">Embeddings hit</text>
+    <g aria-hidden="true">
+      <rect x="30" y="292" width="210" height="72" rx="10" fill="#dce5d8"/>
+      <rect x="252" y="292" width="132" height="72" rx="10" fill="#39766a"/>
+      <rect x="396" y="292" width="132" height="72" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+      <rect x="540" y="292" width="84" height="72" rx="10" fill="#dce5d8" stroke="#142d2a" stroke-width="1.5"/>
+      <rect x="636" y="292" width="126" height="72" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+      <rect x="774" y="292" width="96" height="72" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="135" y="321" font-size="22">Visual work</text>
+      <text x="135" y="348" font-size="22">skipped</text>
+      <text x="318" y="321" font-size="22" fill="#f7f8f4">Visual</text>
+      <text x="318" y="348" font-size="22" fill="#f7f8f4">embeddings</text>
+      <text x="462" y="321" font-size="22">History</text>
+      <text x="462" y="348" font-size="22">LM prefill</text>
+      <text x="582" y="321" font-size="22">Prefix</text>
+      <text x="582" y="348" font-size="22">KV</text>
+      <text x="699" y="321" font-size="22">Query suffix</text>
+      <text x="699" y="348" font-size="22">prefill</text>
+      <text x="822" y="336" font-size="22">Decode</text>
+    </g>
+
+    <text x="30" y="418" font-size="26" font-weight="600">Prefix KV hit</text>
+    <g aria-hidden="true">
+      <rect x="30" y="434" width="498" height="72" rx="10" fill="#dce5d8"/>
+      <rect x="540" y="434" width="84" height="72" rx="10" fill="#39766a"/>
+      <rect x="636" y="434" width="126" height="72" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+      <rect x="774" y="434" width="96" height="72" rx="10" fill="#f7f8f4" stroke="#142d2a" stroke-width="1.5"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="279" y="478" font-size="22">Visual work + history prefill skipped</text>
+      <text x="582" y="463" font-size="22" fill="#f7f8f4">Prefix</text>
+      <text x="582" y="490" font-size="22" fill="#f7f8f4">KV</text>
+      <text x="699" y="463" font-size="22">Query suffix</text>
+      <text x="699" y="490" font-size="22">prefill</text>
+      <text x="822" y="478" font-size="22">Decode</text>
+    </g>
+    <text x="450" y="544" text-anchor="middle" font-size="22">Every route still runs query suffix prefill and decode.</text>
+  </g>
+  <!-- Only executed stages are connected; a cache hit starts at the cached artifact. -->
+  <g aria-hidden="true" fill="none" stroke="#39766a" stroke-width="1.6" marker-end="url(#kv-reuse-arrow)">
+    <path d="M 101 186 H 110"/><path d="M 241 186 H 250"/><path d="M 385 186 H 394"/>
+    <path d="M 529 186 H 538"/><path d="M 625 186 H 634"/><path d="M 763 186 H 772"/>
+    <path d="M 385 328 H 394"/><path d="M 529 328 H 538"/><path d="M 625 328 H 634"/><path d="M 763 328 H 772"/>
+    <path d="M 625 470 H 634"/><path d="M 763 470 H 772"/>
+  </g>
+</svg>
