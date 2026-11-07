@@ -1,5 +1,51 @@
 [
   {
+    "id": "2026-10-26-shared-context",
+    "title": "Shared Context, Separate Engines: Stateful Streaming Inference for Multimodal LLMs on Edge SoCs",
+    "date": "2026-10-26",
+    "year": 2026,
+    "venue": "arXiv preprint, 2026",
+    "area": "On-Device AI",
+    "authors": "<strong>Yilong Li</strong>, Chengpo Yan, Yijing Zeng, Hanlei Wu, Mingjun Song, Suman Banerjee",
+    "note": "ML systems",
+    "abstract": "",
+    "resources": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2610.35309"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2610.35309"
+      }
+    ],
+    "bib": "@misc{li2026sharedcontextseparateengines,\n  title={Shared Context, Separate Engines: Stateful Streaming Inference for Multimodal LLMs on Edge SoCs},\n  author={Yilong Li and Chengpo Yan and Yijing Zeng and Hanlei Wu and Mingjun Song and Suman Banerjee},\n  year={2026},\n  eprint={2610.35309},\n  archivePrefix={arXiv},\n  primaryClass={cs.LG},\n  url={https://arxiv.org/abs/2610.35309}\n}",
+    "metadataSource": "https://arxiv.org/abs/2610.35309"
+  },
+  {
+    "id": "2026-10-05-steering-mechanism",
+    "title": "Does the Model Use the Feature? Separating Steering from Mechanism in LLMs",
+    "date": "2026-10-05",
+    "year": 2026,
+    "venue": "arXiv preprint, 2026",
+    "area": "Efficient AI / Agentic AI / Interpretability",
+    "authors": "Tong Che*, <strong>Yilong Li*</strong>",
+    "note": "* Equal contribution; author order determined by a dice roll.",
+    "abstract": "",
+    "resources": [
+      {
+        "label": "arXiv",
+        "href": "https://arxiv.org/abs/2610.07270"
+      },
+      {
+        "label": "PDF",
+        "href": "https://arxiv.org/pdf/2610.07270"
+      }
+    ],
+    "bib": "@misc{che2026modelusefeature,\n  title={Does the Model Use the Feature? Separating Steering from Mechanism in LLMs},\n  author={Tong Che and Yilong Li},\n  year={2026},\n  eprint={2610.07270},\n  archivePrefix={arXiv},\n  primaryClass={cs.AI},\n  url={https://arxiv.org/abs/2610.07270}\n}",
+    "metadataSource": "https://arxiv.org/abs/2610.07270"
+  },
+  {
     "id": "2026-09-28-knowing",
     "title": "Knowing Is Not Choosing: What Explicit Verification Adds Beyond Generative Preference",
     "date": "2026-09-28",

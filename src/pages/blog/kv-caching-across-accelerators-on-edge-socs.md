@@ -28,12 +28,12 @@ Working on these systems changed the question we ask when optimizing them:
 long will making it usable elsewhere take?**
 
 Our paper has more details:
-[Shared Context, Separate Engines: Streaming Vision-Language Inference on Edge SoCs](https://arxiv.org/pdf/2610.35309)
+[Shared Context, Separate Engines: Stateful Streaming Inference for Multimodal LLMs on Edge SoCs](https://arxiv.org/pdf/2610.35309)
 (arXiv preprint).
 
 ## What Is Actually Being Cached?
 
-In a vision-language model, several objects are casually called "the context."
+In a multimodal LLM (MLLM), several objects are casually called "the context."
 They save different kinds of work.
 
 <div class="blog-table-scroll" role="region" aria-label="What each retained object saves" tabindex="0">
@@ -290,7 +290,7 @@ latency for short contexts when memory is already sufficient.
 
 ## A Small View of the Measurements
 
-One recent RK3588 experiment used a 0.5B vision-language model, two persistent
+One recent RK3588 experiment used a 0.5B MLLM, two persistent
 video streams, eight frames and four queries per stream, and exactly 128 output
 tokens per query. Each configuration had three runs, collected in separate
 groups. The measured window included fresh NPU visual encoding, initial context

@@ -83,5 +83,8 @@ test('measurements keep the retained-context and RSS comparisons separate', asyn
 test('the KV note links its related arXiv paper before the first section', async () => {
   const { body } = await article(kvSlug);
   const introduction = body.split(/^## /m)[0];
-  assert.match(introduction, /\[Shared Context, Separate Engines: Streaming Vision-Language Inference on Edge SoCs\]\(https:\/\/arxiv\.org\/pdf\/2610\.35309\)/);
+  const publications = JSON.parse(await readFile(new URL('../src/data/publications.json', import.meta.url), 'utf8'));
+  const paper = publications.find(paper => paper.id === '2026-10-26-shared-context');
+  assert.ok(paper, 'The related paper must be included in Publications');
+  assert.ok(introduction.includes(`[${paper.title}](https://arxiv.org/pdf/2610.35309)`), 'The blog citation must match the current publication title');
 });

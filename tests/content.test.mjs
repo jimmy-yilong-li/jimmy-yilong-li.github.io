@@ -38,6 +38,39 @@ test('LiveTag co-first authors and public preprint collaborators remain explicit
   assert.match(papers.find(paper => paper.id === '2026-05-26-cppo').venue, /EMNLP/);
 });
 
+test('the steering and mechanism preprint is listed under interpretability with complete authors', () => {
+  const paper = papers.find(paper => paper.id === '2026-10-05-steering-mechanism');
+  assert.ok(paper, 'Missing arXiv:2610.07270 publication');
+  assert.equal(paper.title, 'Does the Model Use the Feature? Separating Steering from Mechanism in LLMs');
+  assert.equal(paper.area, 'Efficient AI / Agentic AI / Interpretability');
+  assert.equal(paper.date, '2026-10-05');
+  assert.equal(paper.year, 2026);
+  assert.equal(paper.venue, 'arXiv preprint, 2026');
+  assert.equal(paper.authors, 'Tong Che*, <strong>Yilong Li*</strong>');
+  assert.equal(paper.note, '* Equal contribution; author order determined by a dice roll.');
+  assert.match(paper.bib, /author=\{Tong Che and Yilong Li\}/);
+  assert.ok(paper.resources.some(resource => resource.label === 'arXiv' && resource.href === 'https://arxiv.org/abs/2610.07270'));
+  assert.ok(paper.resources.some(resource => resource.label === 'PDF' && resource.href === 'https://arxiv.org/pdf/2610.07270'));
+  assert.equal(paperHref(paper), '/papers/2026-10-05-steering-mechanism/');
+  assert.ok(!selectedPublicationIds.includes(paper.id), 'Keep the homepage selection unchanged');
+});
+
+test('Shared Context is listed as an on-device ML systems preprint with all six authors', () => {
+  const paper = papers.find(paper => paper.id === '2026-10-26-shared-context');
+  assert.ok(paper, 'Missing arXiv:2610.35309 publication');
+  assert.equal(paper.title, 'Shared Context, Separate Engines: Stateful Streaming Inference for Multimodal LLMs on Edge SoCs');
+  assert.equal(paper.area, 'On-Device AI');
+  assert.equal(paper.note, 'ML systems');
+  assert.equal(paper.date, '2026-10-26');
+  assert.equal(paper.year, 2026);
+  assert.equal(paper.venue, 'arXiv preprint, 2026');
+  assert.equal(paper.authors, '<strong>Yilong Li</strong>, Chengpo Yan, Yijing Zeng, Hanlei Wu, Mingjun Song, Suman Banerjee');
+  assert.ok(paper.resources.some(resource => resource.label === 'arXiv' && resource.href === 'https://arxiv.org/abs/2610.35309'));
+  assert.ok(paper.resources.some(resource => resource.label === 'PDF' && resource.href === 'https://arxiv.org/pdf/2610.35309'));
+  assert.equal(paperHref(paper), '/papers/2026-10-26-shared-context/');
+  assert.ok(!selectedPublicationIds.includes(paper.id), 'Keep the homepage selection unchanged');
+});
+
 test('exported citations retain every author shown in the publication entry', () => {
   const normalize = name => name.toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(Boolean).sort().join(' ');
   for (const paper of papers.filter(paper => paper.bib)) {

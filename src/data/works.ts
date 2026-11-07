@@ -16,7 +16,7 @@ export const works: ResearchWork[] = [
     kind: 'Paper',
     venue: 'ICLR 2026',
     summary:
-      'A battery-powered multimodal inference system that coordinates model modules, heterogeneous accelerators, and shared memory to run a self-contained assistant locally.',
+      'A battery-powered MLLM inference system that coordinates model modules, heterogeneous accelerators, and shared memory to run a self-contained assistant locally.',
     cover: '/images/nanomind-hardware.png',
     coverAlt:
       'Published NanoMind prototype photo showing camera and audio interfaces alongside the battery module.',
@@ -36,9 +36,9 @@ export const works: ResearchWork[] = [
     sections: [
       {
         id: 'problem',
-        title: 'Multimodal inference is a systems problem',
+        title: 'MLLM inference is a systems problem',
         paragraphs: [
-          'Multimodal models combine vision and audio encoders, projectors, and language generation, each with different computational needs. Mapping the whole pipeline to one accelerator leaves other compute units idle and adds memory traffic and latency.',
+          'Multimodal LLMs (MLLMs) combine vision and audio encoders, projectors, and language generation, each with different computational needs. Mapping the whole pipeline to one accelerator leaves other compute units idle and adds memory traffic and latency.',
           'On a small battery-powered device, efficient execution determines how much sensing and inference can fit within the energy and memory budget. NanoMind co-designs the hardware, scheduling, and data movement to make local multimodal assistance practical.',
         ],
       },
@@ -63,7 +63,7 @@ export const works: ResearchWork[] = [
       },
       {
         id: 'findings',
-        title: 'Energy-efficient local multimodal inference',
+        title: 'Energy-efficient local MLLM inference',
         paragraphs: [
           'The published paper reports 42.3% lower end-to-end energy consumption against the evaluated mainstream edge frameworks and devkits. For LLaVA-OneVision-Qwen2-0.5B with a camera and a 2,000 mAh battery, it estimates nearly 18.8 hours of operation in on-demand low-power mode under low-duty-cycle, event-triggered workloads.',
           'The system breakdown shows how zero-copy buffering reduces memory use and CPU overhead during embedding transfer, while accelerator-specific placement improves vision encoding. Together, the results connect module-level execution decisions to the energy cost of the complete assistant.',
@@ -156,7 +156,7 @@ export const works: ResearchWork[] = [
         title: 'Choosing mobile model configurations',
         paragraphs: [
           'PalmBench organizes the deployment decision around combinations of model, quantization method, runtime, and hardware. Comparing these combinations across quality and systems metrics helps identify configurations suited to a device\'s memory and energy budget and an application\'s tasks.',
-          'This measurement-driven approach complements NanoMind\'s execution design. PalmBench characterizes compressed mobile LLM workloads, while NanoMind coordinates the accelerators and shared memory used by a multimodal pipeline.',
+          'This measurement-driven approach complements NanoMind\'s execution design. PalmBench characterizes compressed mobile LLM workloads, while NanoMind coordinates the accelerators and shared memory used by an MLLM pipeline.',
         ],
       },
     ],
@@ -173,7 +173,7 @@ export const works: ResearchWork[] = [
     kind: 'Project',
     venue: 'On-device assistant',
     summary:
-      'A wearable visual-memory assistant built on NanoMind hardware, combining local vision-language inference with persistent object and face recognition.',
+      'A wearable visual-memory assistant built on NanoMind hardware, combining local MLLM inference with persistent object and face recognition.',
     cover: '/images/virgile-concept.png',
     coverAlt:
       'Concept illustration of a wearable visual assistant, with a person observing surroundings and rendered glasses connected to a small device.',
@@ -190,14 +190,14 @@ export const works: ResearchWork[] = [
         title: 'Visual assistance beyond a single observation',
         paragraphs: [
           'A visual-memory assistant connects the current camera view to objects and faces encountered before. Virgile focuses on persistent recognition across observations, bringing continuity to visual assistance on an edge device.',
-          'Wearable use also places sensing, inference, and memory within an embedded resource budget. The project investigates how an assistant can connect visual observations to persistent recognition while keeping vision-language inference local.',
+          'Wearable use also places sensing, inference, and memory within an embedded resource budget. The project investigates how an assistant can connect visual observations to persistent recognition while keeping MLLM inference local.',
         ],
       },
       {
         id: 'system',
         title: 'Persistent recognition on the NanoMind platform',
         paragraphs: [
-          'Virgile is built on the NanoMind hardware platform. It combines custom sensors, embedded hardware, accelerator-aware software, and local vision-language inference to support persistent object and face recognition.',
+          'Virgile is built on the NanoMind hardware platform. It combines custom sensors, embedded hardware, accelerator-aware software, and local MLLM inference to support persistent object and face recognition.',
           'NanoMind provides resource-aware local execution, while Virgile focuses on visual-memory assistance. Pairing embedded sensing with persistent recognition connects new visual observations to familiar objects and faces over time.',
         ],
         image: {
@@ -211,7 +211,7 @@ export const works: ResearchWork[] = [
         id: 'prototype-scope',
         title: 'Visual understanding and face-and-item memory',
         paragraphs: [
-          'Persistent recognition gives the project a concrete focus: making encountered objects and faces part of the assistant\'s visual memory. Local multimodal inference and embedded sensing provide the foundations for that continuity.',
+          'Persistent recognition gives the project a concrete focus: making encountered objects and faces part of the assistant\'s visual memory. Local MLLM inference and embedded sensing provide the foundations for that continuity.',
           'The Re-Mind slides describe a real-time demonstration of visual understanding and face-and-item memory on custom-built hardware. They place this capability within the broader research program on personalized memory assistance.',
         ],
       },
@@ -220,7 +220,7 @@ export const works: ResearchWork[] = [
         title: 'Toward personalized memory assistance',
         paragraphs: [
           'The broader Re-Mind direction explores personalized memory and cognitive accessibility, with goals such as understanding surroundings and finding items. Virgile contributes the local perception and persistent-recognition foundations for this direction.',
-          'The project brings together the embedded systems and application questions: how to run multimodal inference within a wearable resource budget, and how to make visual observations useful across repeated encounters.',
+          'The project brings together the embedded systems and application questions: how to run MLLM inference within a wearable resource budget, and how to make visual observations useful across repeated encounters.',
         ],
       },
     ],
