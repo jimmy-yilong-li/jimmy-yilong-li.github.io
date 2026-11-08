@@ -12,6 +12,9 @@ test('deployment validates the standalone site and publishes only built files', 
   assert.deepEqual(workflow.on.push.branches, ['master']);
   const steps = workflow.jobs.build.steps;
   const commands = steps.map(step => step.run).filter(Boolean);
+  const xmlTools = steps.findIndex(step => /apt-get install.*libxml2-utils/.test(step.run ?? ''));
+  assert.ok(xmlTools >= 0, 'Install xmllint explicitly instead of relying on the runner image');
+  assert.ok(xmlTools < steps.findIndex(step => step.run === 'npm test'), 'XML tools must be installed before tests');
   for (const command of ['npm ci', 'npm test', 'npm run check', 'npm run build', 'npm run verify']) {
     assert.ok(commands.includes(command), `Missing deployment gate: ${command}`);
   }

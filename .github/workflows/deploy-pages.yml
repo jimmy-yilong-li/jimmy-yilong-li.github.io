@@ -30,6 +30,10 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install dependencies
         run: npm ci
+      - name: Install SVG validation tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y libxml2-utils
       - name: Prepare public assets
         run: npm run prepare:assets
       - name: Test content and deployment boundaries
