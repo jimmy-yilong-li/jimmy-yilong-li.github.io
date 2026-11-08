@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560" role="img" aria-labelledby="accel-title accel-desc">
+  <title id="accel-title">Speed wins. Acceleration wins.</title>
+  <desc id="accel-desc">Two conceptual charts show development speed over time, with illustrative fluctuations rather than measured data. Left: blue and dashed red traces fluctuate around higher and lower speeds. Right: both start at the same speed; despite local setbacks, the blue product-and-loop trace rises increasingly fast while the red product-only trace rises slowly. These are conceptual trends, not guaranteed outcomes or unlimited growth.</desc>
+  <rect width="900" height="560" fill="#f7f8f4"/>
+  <path d="M450 44V475" stroke="#dce5d8" stroke-width="2"/>
+  <g font-family="sans-serif" fill="#142d2a">
+    <text x="48" y="53" font-size="17" letter-spacing="2" fill="#54645e">01 / FIXED CAPACITY</text>
+    <text x="490" y="53" font-size="17" letter-spacing="2" fill="#54645e">02 / EVOLVING CAPACITY</text>
+    <text x="48" y="99" font-size="34" font-weight="600">Speed wins.</text>
+    <text x="490" y="99" font-size="34" font-weight="600">Acceleration wins.</text>
+    <text x="83" y="149" font-size="19">Development Speed</text>
+    <text x="525" y="149" font-size="19">Development Speed</text>
+    <g fill="none" stroke="#dce5d8" stroke-width="1">
+      <path d="M83 200H407M83 265H407M83 330H407M525 200H849M525 265H849M525 330H849"/>
+    </g>
+    <g fill="none" stroke="#78877e" stroke-width="1.8">
+      <path d="M83 173V393H410M525 173V393H852"/>
+      <path d="M79 179L83 173L87 179M404 389L410 393L404 397M521 179L525 173L529 179M846 389L852 393L846 397"/>
+    </g>
+    <g fill="none" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+      <path id="fixed-blue" d="M84 228L97 225L110 232L123 229L136 222L149 226L162 224L175 233L188 230L201 234L214 227L227 223L240 229L253 225L266 232L279 228L292 221L305 224L318 230L331 226L344 233L357 229L370 224L383 227L400 225" stroke="#2463a0"/>
+      <path id="fixed-red" d="M84 330L97 334L110 328L123 332L136 335L149 329L162 332L175 326L188 330L201 327L214 334L227 331L240 336L253 329L266 325L279 330L292 333L305 327L318 331L331 335L344 329L357 332L370 326L383 330L400 328" stroke="#ad4c42" stroke-dasharray="10 8"/>
+      <path id="growing-blue" d="M526 365L539 361L552 364L565 358L578 361L591 354L604 356L617 347L630 350L643 339L656 342L669 329L682 321L695 325L708 311L721 300L734 304L747 286L760 275L773 279L786 257L799 242L812 245L825 212L842 180" stroke="#2463a0"/>
+      <path id="growing-red" d="M526 365L539 368L552 363L565 366L578 360L591 363L604 359L617 362L630 356L643 359L656 353L669 357L682 352L695 355L708 348L721 351L734 346L747 350L760 342L773 345L786 338L799 341L812 333L825 336L842 324" stroke="#ad4c42" stroke-dasharray="10 8"/>
+    </g>
+    <circle cx="526" cy="365" r="5" fill="#142d2a"/>
+    <text x="105" y="213" font-size="19" fill="#2463a0">Faster team</text>
+    <text x="105" y="315" font-size="19" fill="#ad4c42">Slower team</text>
+    <text x="638" y="203" font-size="19" fill="#2463a0">Product + loop</text>
+    <text x="742" y="328" font-size="19" fill="#ad4c42">Product only</text>
+    <text x="548" y="379" font-size="15" fill="#54645e">Same starting speed</text>
+    <text x="369" y="423" font-size="19">Time</text>
+    <text x="811" y="423" font-size="19">Time</text>
+    <text x="83" y="467" font-size="19">A higher speed.</text>
+    <text x="525" y="467" font-size="19">A growing speed advantage.</text>
+    <path d="M48 494H852" stroke="#dce5d8"/>
+    <text x="48" y="529" font-size="16" fill="#54645e">Conceptual illustration / Speed = validated progress per unit of time</text>
+  </g>
+</svg>

@@ -165,7 +165,7 @@ test('news and blog only contain approved, completed content', async () => {
     assert.ok(works.some(work => item.href === `/work/${work.slug}/`));
   }
   const blog = await json('blog');
-  assert.equal(blog.length, 2);
+  assert.equal(blog.length, 3);
   for (const post of blog) {
     const text = await readFile(new URL(`../src/pages/blog/${post.slug}.md`, import.meta.url), 'utf8');
     assert.doesNotMatch(text, /EdgeFlow|unpublished internal experiments/i);

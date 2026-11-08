@@ -6,6 +6,7 @@ import { parse } from 'yaml';
 const posts = JSON.parse(await readFile(new URL('../src/data/blog.json', import.meta.url), 'utf8'));
 const kvSlug = 'kv-caching-across-accelerators-on-edge-socs';
 const previousSlug = 'what-we-learned-the-hard-way-about-npus-gpus-and-unified-memory';
+const accelerationSlug = 'the-end-of-rapid-iteration';
 
 async function article(slug) {
   const source = await readFile(new URL(`../src/pages/blog/${slug}.md`, import.meta.url), 'utf8');
@@ -14,10 +15,9 @@ async function article(slug) {
   return { metadata: parse(match[1]), body: match[2] };
 }
 
-test('Blog lists exactly the two approved articles, newest first', () => {
-  assert.deepEqual(posts.map(post => post.slug), [kvSlug, previousSlug]);
-  assert.equal(posts[0].title, 'KV Caching Across Accelerators on Edge SoCs');
-  assert.equal(posts[0].date, '2026-10-21');
+test('Blog lists exactly the three approved articles, newest first', () => {
+  assert.deepEqual(posts.map(post => post.slug), [accelerationSlug, kvSlug, previousSlug]);
+  assert.equal(posts[0].title, 'The End of Rapid Iteration');
   assert.deepEqual(posts.map(post => post.date), posts.map(post => post.date).sort().reverse());
 });
 
@@ -33,8 +33,24 @@ test('each article has matching metadata and its own accessible illustration', a
     await access(new URL(`../public${post.cover}`, import.meta.url));
     if (post.coverMobile) await access(new URL(`../public${post.coverMobile}`, import.meta.url));
   }
-  assert.equal(posts[0].cover, '/images/kv-context-branches.svg');
-  assert.equal(posts[1].cover, '/images/compute-memory.svg');
+  assert.equal(posts.find(post => post.slug === kvSlug).cover, '/images/kv-context-branches.svg');
+  assert.equal(posts.find(post => post.slug === previousSlug).cover, '/images/compute-memory.svg');
+});
+
+test('the acceleration essay has a complete argument without a homepage teaser', async () => {
+  const { metadata, body } = await article(accelerationSlug);
+  assert.equal(metadata.cover, '/images/speed-acceleration.svg');
+  assert.equal(metadata.coverMobile, '/images/speed-acceleration-mobile.svg');
+  assert.ok(posts.some(post => post.slug === metadata.relatedSlug));
+  assert.equal((body.match(/^## /gm) ?? []).length, 4);
+  assert.doesNotMatch(body, /^# /m);
+  for (const phrase of ['Recursive Self-Improvement', 'experience capital', 'inference engine', 'held-out', 'https://arxiv.org/abs/2505.22954']) {
+    assert.ok(body.includes(phrase), `Missing argument or source: ${phrase}`);
+  }
+  const words = body.split(/\s+/).filter(Boolean).length;
+  assert.ok(words >= 1200 && words <= 1700, `Essay length: ${words}`);
+  const homepage = await readFile(new URL('../src/pages/index.astro', import.meta.url), 'utf8');
+  assert.ok(!homepage.includes(accelerationSlug));
 });
 
 test('the KV note preserves the explanation, experiment scope, and public references', async () => {

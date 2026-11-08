@@ -1,5 +1,16 @@
 [
   {
+    "slug": "the-end-of-rapid-iteration",
+    "title": "The End of Rapid Iteration",
+    "summary": "Why acceleration is becoming the new competitive advantage.",
+    "date": "2026-11-07",
+    "minutes": 7,
+    "cover": "/images/speed-acceleration.svg",
+    "coverMobile": "/images/speed-acceleration-mobile.svg",
+    "coverAlt": "Two conceptual charts compare development speed over time with irregular fluctuations: blue maintains a higher speed on the left; on the right, blue accelerates above red from the same starting point despite local setbacks.",
+    "coverCaption": "Conceptual illustration, not measured data. Left: a higher development speed despite day-to-day fluctuations. Right: the development system also improves, allowing the speed advantage to grow. Development speed means validated progress per unit of time."
+  },
+  {
     "slug": "kv-caching-across-accelerators-on-edge-socs",
     "title": "KV Caching Across Accelerators on Edge SoCs",
     "summary": "What a KV cache saves, when another engine can use it, and when rebuilding the context is the better option.",
